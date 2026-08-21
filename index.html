@@ -98,7 +98,7 @@ onValue(ref(db, 'products'), (snap)=>{
       <div class="product-card">
         <img src="${p.image}" onerror="this.src='https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=500'">
         <h3>${p.name}</h3>
-        <p style="color:#c8a27a;font-weight:700;margin:4px 0">R ${p.price}</p>
+
         <p style="font-size:12px;color:#888;margin-bottom:8px">${p.desc||''}</p>
         <a href="https://wa.me/27645464275?text=Hi Dreamy Designs! I want ${encodeURIComponent(p.name)} - R${p.price}" target="_blank"><button style="margin-top:6px;background:#1a1a1a;color:#c8a27a;border:none;padding:11px 20px;border-radius:50px;font-weight:700;cursor:pointer;width:100%">Enquire on WhatsApp</button></a>
       </div>
