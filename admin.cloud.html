@@ -1,27 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dreamy Designs - Admin</title>
 <style>
-body{font-family:Arial,sans-serif;background:#0f0f0f;color:#fff;padding:20px}
-h1{color:#d4af37;text-align:center}
-.container{max-width:900px;margin:0 auto;background:#1a1a1a;padding:20px;border-radius:12px;border:1px solid #d4af37}
-label{display:block;margin-top:15px;color:#d4af37;font-weight:bold}
-select,input,textarea{width:100%;padding:12px;margin-top:5px;background:#2a2a2a;color:#fff;border:1px solid #444;border-radius:8px;box-sizing:border-box}
-button{background:linear-gradient(135deg,#d4af37,#b8962e);color:#000;padding:14px 24px;border:none;border-radius:8px;font-weight:bold;cursor:pointer;width:100%;margin-top:20px;font-size:16px}
-button:hover{opacity:0.9}
-.preview{margin-top:15px;display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px}
-.preview img{width:100%;height:120px;object-fit:cover;border-radius:8px;border:1px solid #d4af37}
-.product-list{margin-top:30px}
-.item{background:#222;padding:15px;border-radius:8px;margin-bottom:10px;display:flex;gap:15px;align-items:center}
-.item img{width:80px;height:80px;object-fit:cover;border-radius:6px}
-.cat-badge{background:#d4af37;color:#000;padding:3px 8px;border-radius:12px;font-size:11px;font-weight:bold}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:#faf8f5;color:#2b2b2b}
+.banner{height:220px;background:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.6)),url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1920&q=80');background-size:cover;background-position:center;display:flex;flex-direction:column;align-items:center;justify-content:center;color:white;text-align:center}
+.banner h1{font-size:42px;letter-spacing:5px;font-weight:900}
+.banner p{margin-top:8px;letter-spacing:2px;color:#f5efe6}
+.container{max-width:900px;margin:-30px auto 40px;background:white;padding:28px;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,0.1);border:1px solid #f0e6d8}
+label{display:block;margin-top:18px;font-weight:bold;color:#5a4a3a;font-size:14px;letter-spacing:0.5px}
+select,input,textarea{width:100%;padding:12px;margin-top:6px;background:#faf8f5;border:1px solid #e8d5bc;border-radius:10px;box-sizing:border-box}
+select{font-weight:600}
+button.main{background:#2b2b2b;color:#f5efe6;padding:14px 24px;border:none;border-radius:10px;font-weight:bold;cursor:pointer;width:100%;margin-top:20px;font-size:16px;letter-spacing:0.5px}
+button.main:hover{background:#000}
+button.sec{background:white;color:#5a4a3a;border:1px solid #e8d5bc;padding:12px 24px;border-radius:10px;cursor:pointer;width:100%;margin-top:10px;font-weight:600}
+.preview{margin-top:12px;display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px}
+.preview img{width:100%;height:110px;object-fit:cover;border-radius:10px;border:1px solid #e8d5bc}
+.item{background:#faf8f5;padding:14px;border-radius:12px;margin-bottom:10px;display:flex;gap:14px;align-items:center;border:1px solid #f0e6d8}
+.item img{width:70px;height:70px;object-fit:cover;border-radius:8px}
+.badge{background:#2b2b2b;color:#f5efe6;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:bold}
 </style>
 </head>
 <body>
-<h1>✨ Dreamy Designs Admin</h1>
+<div class="banner">
+<h1>DREAMY DESIGNS</h1>
+<p>ADMIN PANEL — Handcrafted Laser Engraved Creations</p>
+</div>
 <div class="container">
 <label>Category *</label>
 <select id="category">
@@ -33,63 +39,37 @@ button:hover{opacity:0.9}
 <option value="Puzzles & educational">Puzzles & educational</option>
 <option value="Industrial & prototyping">Industrial & prototyping</option>
 </select>
-
 <label>Product Name *</label>
 <input id="name" placeholder="e.g. Custom Wooden Sign">
-
 <label>Description</label>
 <textarea id="desc" rows="3" placeholder="Tell customers about this product..."></textarea>
-
 <label>Product Photos * (Multiple)</label>
 <input type="file" id="photos" multiple accept="image/*">
 <div id="preview" class="preview"></div>
-
-<button onclick="addProduct()">+ Add Product to Website</button>
-<button onclick="downloadJSON()" style="background:#333;color:#d4af37;border:1px solid #d4af37;margin-top:10px">💾 Download products.json (Upload to GitHub)</button>
-<button onclick="viewSite()" style="background:#111;color:#fff;border:1px solid #444">🌐 View Live Site</button>
-
-<div class="product-list" id="productList"></div>
+<button class="main" onclick="addProduct()">+ Add Product to Website</button>
+<button class="sec" onclick="downloadJSON()">💾 Download products.json (Upload to GitHub)</button>
+<button class="sec" onclick="viewSite()">🌐 View Live Site</button>
+<div id="productList" style="margin-top:28px"></div>
 </div>
-
 <script>
-let products = JSON.parse(localStorage.getItem('dreamy_products') || '[]');
-let tempImages = [];
-document.getElementById('photos').addEventListener('change', function(e){
-  tempImages=[]; document.getElementById('preview').innerHTML='';
-  Array.from(e.target.files).forEach(file=>{
-    const reader=new FileReader();
-    reader.onload=function(ev){
-      tempImages.push(ev.target.result);
-      const img=document.createElement('img');
-      img.src=ev.target.result;
-      document.getElementById('preview').appendChild(img);
-    };
-    reader.readAsDataURL(file);
-  });
+let products=JSON.parse(localStorage.getItem('dreamy_products')||'[]');let tempImages=[];
+document.getElementById('photos').addEventListener('change',function(e){
+ tempImages=[];document.getElementById('preview').innerHTML='';
+ Array.from(e.target.files).forEach(file=>{const reader=new FileReader();reader.onload=function(ev){tempImages.push(ev.target.result);const img=document.createElement('img');img.src=ev.target.result;document.getElementById('preview').appendChild(img);};reader.readAsDataURL(file);});
 });
 function addProduct(){
-  const cat=document.getElementById('category').value;
-  const name=document.getElementById('name').value.trim();
-  const desc=document.getElementById('desc').value.trim();
-  if(!name || tempImages.length===0){alert('Please add product name and at least 1 photo!');return;}
-  products.unshift({id:Date.now(),category:cat,name,desc,images:tempImages});
-  localStorage.setItem('dreamy_products',JSON.stringify(products));
-  render();
-  document.getElementById('name').value=''; document.getElementById('desc').value=''; document.getElementById('preview').innerHTML=''; tempImages=[];
-  alert('Product added! Now click Download products.json and upload it to GitHub.');
+ const cat=document.getElementById('category').value;const name=document.getElementById('name').value.trim();const desc=document.getElementById('desc').value.trim();
+ if(!name||tempImages.length===0){alert('Add name + at least 1 photo!');return;}
+ products.unshift({id:Date.now(),category:cat,name,desc,images:tempImages});localStorage.setItem('dreamy_products',JSON.stringify(products));render();
+ document.getElementById('name').value='';document.getElementById('desc').value='';document.getElementById('preview').innerHTML='';tempImages=[];
+ alert('Added! Now Download products.json and upload to GitHub.');
 }
 function render(){
-  const list=document.getElementById('productList');
-  list.innerHTML='<h3 style="color:#d4af37">Added Products ('+products.length+')</h3>';
-  products.forEach((p,i)=>{
-    list.innerHTML+=`<div class="item"><img src="${p.images[0]}"><div style="flex:1"><span class="cat-badge">${p.category}</span><div style="font-weight:bold;margin-top:5px">${p.name}</div><div style="font-size:13px;color:#aaa">${p.desc.substring(0,80)}</div></div><button onclick="removeProduct(${i})" style="width:auto;padding:8px 12px;background:#ff4444;color:#fff">X</button></div>`;
-  });
+ const list=document.getElementById('productList');list.innerHTML='<h3 style="margin-bottom:12px">Added Products ('+products.length+')</h3>';
+ products.forEach((p,i)=>{list.innerHTML+=`<div class="item"><img src="${p.images[0]}"><div style="flex:1"><span class="badge">${p.category}</span><div style="font-weight:bold;margin-top:4px">${p.name}</div><div style="font-size:13px;color:#8a7a6a">${p.desc.substring(0,70)}</div></div><button onclick="removeProduct(${i})" style="width:auto;padding:8px 12px;background:#c94a4a;color:white;border:none;border-radius:8px;cursor:pointer">X</button></div>`;});
 }
 function removeProduct(i){products.splice(i,1);localStorage.setItem('dreamy_products',JSON.stringify(products));render();}
-function downloadJSON(){
-  const dataStr="data:text/json;charset=utf-8,"+encodeURIComponent(JSON.stringify(products,null,2));
-  const a=document.createElement('a');a.href=dataStr;a.download="products.json";a.click();
-}
+function downloadJSON(){const dataStr="data:text/json;charset=utf-8,"+encodeURIComponent(JSON.stringify(products,null,2));const a=document.createElement('a');a.href=dataStr;a.download="products.json";a.click();}
 function viewSite(){window.open('https://dreamy-designs.github.io/Dreamy-Designs/','_blank')}
 render();
 </script>
