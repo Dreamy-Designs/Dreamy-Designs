@@ -1,136 +1,97 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin Cloud - Dreamy Designs</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dreamy Designs - Admin</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;600;700&display=swap');
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:#faf6f1;font-family:'Inter',sans-serif}
-header{background:#1a1a1a;color:#f5efe6;text-align:center;padding:35px 20px 25px}
-header h1{font-family:'Playfair Display',serif;font-size:36px;color:#f5efe6}
-header p{color:#c8a27a;letter-spacing:3px;font-size:12px;margin-top:8px}
-.wrap{max-width:900px;margin:30px auto;padding:0 20px}
-.card{background:white;border-radius:20px;padding:25px;box-shadow:0 4px 20px rgba(0,0,0,.06);border:1px solid #f0e6d8;margin-bottom:25px}
-.card h2{font-family:'Playfair Display',serif;margin-bottom:18px;color:#1a1a1a}
-input,textarea{width:100%;padding:12px 15px;border:1px solid #e8ddd0;border-radius:12px;margin-bottom:14px;font-family:'Inter';font-size:14px;background:#fdfaf6}
-input:focus,textarea:focus{outline:none;border-color:#c8a27a}
-button.main{background:#1a1a1a;color:#c8a27a;border:none;padding:13px 25px;border-radius:50px;font-weight:700;cursor:pointer;width:100%;font-size:15px;letter-spacing:1px}
-button.main:hover{background:#000}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
-.p-card{background:#faf6f1;border-radius:16px;padding:12px;border:1px solid #f0e6d8;text-align:center}
-.p-card img{width:100%;height:160px;object-fit:cover;border-radius:12px;background:white}
-.badge{display:inline-block;background:#1a1a1a;color:#c8a27a;padding:4px 12px;border-radius:50px;font-size:11px;margin-top:8px}
-.btns{display:flex;gap:8px;margin-top:10px}
-.btns button{flex:1;padding:8px;border-radius:50px;border:none;cursor:pointer;font-weight:600;font-size:12px}
-.del{background:#ffeaea;color:#a33}
-.edit{background:#f0e6d8;color:#5a4a3a}
-.status{text-align:center;padding:10px;background:white;border:1px dashed #c8a27a;border-radius:50px;width:fit-content;margin:0 auto 15px;font-size:13px}
+body{font-family:Arial,sans-serif;background:#0f0f0f;color:#fff;padding:20px}
+h1{color:#d4af37;text-align:center}
+.container{max-width:900px;margin:0 auto;background:#1a1a1a;padding:20px;border-radius:12px;border:1px solid #d4af37}
+label{display:block;margin-top:15px;color:#d4af37;font-weight:bold}
+select,input,textarea{width:100%;padding:12px;margin-top:5px;background:#2a2a2a;color:#fff;border:1px solid #444;border-radius:8px;box-sizing:border-box}
+button{background:linear-gradient(135deg,#d4af37,#b8962e);color:#000;padding:14px 24px;border:none;border-radius:8px;font-weight:bold;cursor:pointer;width:100%;margin-top:20px;font-size:16px}
+button:hover{opacity:0.9}
+.preview{margin-top:15px;display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px}
+.preview img{width:100%;height:120px;object-fit:cover;border-radius:8px;border:1px solid #d4af37}
+.product-list{margin-top:30px}
+.item{background:#222;padding:15px;border-radius:8px;margin-bottom:10px;display:flex;gap:15px;align-items:center}
+.item img{width:80px;height:80px;object-fit:cover;border-radius:6px}
+.cat-badge{background:#d4af37;color:#000;padding:3px 8px;border-radius:12px;font-size:11px;font-weight:bold}
 </style>
 </head>
 <body>
-<div id="lockScreen" style="position:fixed;inset:0;background:#111;display:flex;align-items:center;justify-content:center;z-index:999999">
-<div style="background:white;padding:30px;border-radius:16px;width:90%;max-width:360px;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,0.5)">
-<h2 style="margin:0">🔒 Admin Login</h2><p>Dreamy Designs - Private</p>
-<input type="password" id="passInput" placeholder="Enter Password" style="width:100%;padding:12px;margin:15px 0;border:2px solid #ddd;border-radius:8px;font-size:16px;box-sizing:border-box" onkeydown="if(event.key==='Enter')checkPass()">
-<button onclick="checkPass()" style="width:100%;padding:12px;background:#1a1a1a;color:#c8a27a;border:none;border-radius:8px;font-size:16px;font-weight:700;cursor:pointer">Unlock Admin</button>
-<div id="error" style="color:red;display:none;margin-top:10px">Wrong password! Try again.</div>
-</div></div>
-<script>
-const ADMIN_PASSWORD="Dreamy2024@";
-function checkPass(){
-  const v=document.getElementById('passInput').value;
-  if(v===ADMIN_PASSWORD){
-    document.getElementById('lockScreen').style.display='none';
-    sessionStorage.setItem('dreamy_auth','1');
-  }else{
-    document.getElementById('error').style.display='block';
-    document.getElementById('passInput').value='';
-  }
-}
-if(sessionStorage.getItem('dreamy_auth')==='1'){
-  document.getElementById('lockScreen').style.display='none';
-}
-</script>
-  <header>
-  <h1>Dreamy Designs</h1>
-  <p>ADMIN CLOUD • LASER CUTTING AND ENGRAVING</p>
-  <div style="margin-top:15px"><a href="index.html" style="color:#c8a27a;text-decoration:none;border:1px solid #c8a27a;padding:6px 18px;border-radius:50px;font-size:12px">← Back to Shop</a></div>
-</header>
+<h1>✨ Dreamy Designs Admin</h1>
+<div class="container">
+<label>Category *</label>
+<select id="category">
+<option value="Home decor">Home decor</option>
+<option value="Personalized gifts">Personalized gifts</option>
+<option value="Pet tags & accessories">Pet tags & accessories</option>
+<option value="Kitchen & serverware">Kitchen & serverware</option>
+<option value="Signage & displays">Signage & displays</option>
+<option value="Puzzles & educational">Puzzles & educational</option>
+<option value="Industrial & prototyping">Industrial & prototyping</option>
+</select>
 
-<div class="wrap">
-  <div id="cloud-status" class="status">☁️ Connecting to cloud...</div>
+<label>Product Name *</label>
+<input id="name" placeholder="e.g. Custom Wooden Sign">
 
-  <div class="card">
-    <h2>Add New Creation</h2>
-    <input id="pName" placeholder="Product name e.g. Home Sweet Home Sign">
-    <input id="pPrice" type="number" placeholder="Price e.g. 150">
-    <input id="pImage" placeholder="Image URL - paste link or upload to imgbb.com and paste link">
-    <textarea id="pDesc" placeholder="Description e.g. 30cm round, pine wood, laser engraved" rows="3"></textarea>
-    <button class="main" id="addBtn">☁️ SAVE TO CLOUD</button>
-    <p style="font-size:11px;color:#a67c52;margin-top:10px;text-align:center">Tip: Save image first to https://imgbb.com then paste link here. Product appears on phone instantly!</p>
-  </div>
+<label>Description</label>
+<textarea id="desc" rows="3" placeholder="Tell customers about this product..."></textarea>
 
-  <div class="card">
-    <h2>Live Products (<span id="count">0</span>)</h2>
-    <div id="list" class="grid"></div>
-  </div>
+<label>Product Photos * (Multiple)</label>
+<input type="file" id="photos" multiple accept="image/*">
+<div id="preview" class="preview"></div>
+
+<button onclick="addProduct()">+ Add Product to Website</button>
+<button onclick="downloadJSON()" style="background:#333;color:#d4af37;border:1px solid #d4af37;margin-top:10px">💾 Download products.json (Upload to GitHub)</button>
+<button onclick="viewSite()" style="background:#111;color:#fff;border:1px solid #444">🌐 View Live Site</button>
+
+<div class="product-list" id="productList"></div>
 </div>
 
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getDatabase, ref, onValue, push, remove, set } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
-const firebaseConfig = {
-    apiKey: "AIzaSyCKinMyZosG9At3h9fMrOtfcfC3090a-1xU",
-    authDomain: "dreamy-designs-c396f.firebaseapp.com",
-    databaseURL: "https://dreamy-designs-c396f-default-rtdb.firebaseio.com",
-    projectId: "dreamy-designs-c396f",
-    storageBucket: "dreamy-designs-c396f.firebasestorage.app",
-    messagingSenderId: "118249238361",
-    appId: "1:118249238361:web:ddfa9288dc51a86e11c388"
-};
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
-const productsRef = ref(db, 'products');
-const status = document.getElementById('cloud-status');
-const list = document.getElementById('list');
-const count = document.getElementById('count');
-
-document.getElementById('addBtn').onclick = async () => {
-  const name = document.getElementById('pName').value.trim();
-  const price = document.getElementById('pPrice').value.trim();
-  const image = document.getElementById('pImage').value.trim() || 'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=500';
-  const desc = document.getElementById('pDesc').value.trim();
-  if(!name || !price){ alert('Add name + price!'); return; }
-  const newRef = push(productsRef);
-  await set(newRef, { id: newRef.key, name, price, image, desc, created: Date.now() });
-  document.getElementById('pName').value=''; document.getElementById('pPrice').value=''; document.getElementById('pImage').value=''; document.getElementById('pDesc').value='';
-  alert('✅ Saved to cloud! Check your phone - it\'s live!');
-};
-
-onValue(productsRef, (snap)=>{
-  const data = snap.val();
-  const products = data ? Object.values(data) : [];
-  status.textContent = `✅ Live from Cloud - ${products.length} products synced`;
-  count.textContent = products.length;
-  if(!products.length){ list.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:30px;color:#a67c52">No products yet. Add your first creation above ✨</div>`; return; }
-  list.innerHTML = products.slice().reverse().map(p=>`
-    <div class="p-card">
-      <img src="${p.image}" onerror="this.src='https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=500'">
-      <div style="font-weight:700;margin-top:8px">${p.name}</div>
-      <div class="badge">R ${p.price}</div>
-      <div style="font-size:11px;color:#888;margin-top:4px">${p.desc||''}</div>
-      <div class="btns">
-        <button class="del" onclick="deleteProduct('${p.id}')">Delete</button>
-      </div>
-    </div>
-  `).join('');
+<script>
+let products = JSON.parse(localStorage.getItem('dreamy_products') || '[]');
+let tempImages = [];
+document.getElementById('photos').addEventListener('change', function(e){
+  tempImages=[]; document.getElementById('preview').innerHTML='';
+  Array.from(e.target.files).forEach(file=>{
+    const reader=new FileReader();
+    reader.onload=function(ev){
+      tempImages.push(ev.target.result);
+      const img=document.createElement('img');
+      img.src=ev.target.result;
+      document.getElementById('preview').appendChild(img);
+    };
+    reader.readAsDataURL(file);
+  });
 });
-
-window.deleteProduct = async (id) => {
-  if(!confirm('Delete this product from cloud? It will disappear from phone too!')) return;
-  await remove(ref(db, 'products/'+id));
-};
+function addProduct(){
+  const cat=document.getElementById('category').value;
+  const name=document.getElementById('name').value.trim();
+  const desc=document.getElementById('desc').value.trim();
+  if(!name || tempImages.length===0){alert('Please add product name and at least 1 photo!');return;}
+  products.unshift({id:Date.now(),category:cat,name,desc,images:tempImages});
+  localStorage.setItem('dreamy_products',JSON.stringify(products));
+  render();
+  document.getElementById('name').value=''; document.getElementById('desc').value=''; document.getElementById('preview').innerHTML=''; tempImages=[];
+  alert('Product added! Now click Download products.json and upload it to GitHub.');
+}
+function render(){
+  const list=document.getElementById('productList');
+  list.innerHTML='<h3 style="color:#d4af37">Added Products ('+products.length+')</h3>';
+  products.forEach((p,i)=>{
+    list.innerHTML+=`<div class="item"><img src="${p.images[0]}"><div style="flex:1"><span class="cat-badge">${p.category}</span><div style="font-weight:bold;margin-top:5px">${p.name}</div><div style="font-size:13px;color:#aaa">${p.desc.substring(0,80)}</div></div><button onclick="removeProduct(${i})" style="width:auto;padding:8px 12px;background:#ff4444;color:#fff">X</button></div>`;
+  });
+}
+function removeProduct(i){products.splice(i,1);localStorage.setItem('dreamy_products',JSON.stringify(products));render();}
+function downloadJSON(){
+  const dataStr="data:text/json;charset=utf-8,"+encodeURIComponent(JSON.stringify(products,null,2));
+  const a=document.createElement('a');a.href=dataStr;a.download="products.json";a.click();
+}
+function viewSite(){window.open('https://dreamy-designs.github.io/Dreamy-Designs/','_blank')}
+render();
 </script>
 </body>
 </html>
