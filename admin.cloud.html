@@ -29,7 +29,19 @@ button.main:hover{background:#000}
 </style>
 </head>
 <body>
-<header>
+<div id="lockScreen" style="position:fixed;inset:0;background:#111;display:flex;align-items:center;justify-content:center;z-index:999999">
+<div style="background:white;padding:30px;border-radius:16px;width:90%;max-width:360px;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,0.5)">
+<h2 style="margin:0">🔒 Admin Login</h2><p>Dreamy Designs - Private</p>
+<input type="password" id="passInput" placeholder="Enter Password" style="width:100%;padding:12px;margin:15px 0;border:2px solid #ddd;border-radius:8px;font-size:16px;box-sizing:border-box" onkeydown="if(event.key==='Enter')checkPass()">
+<button onclick="checkPass()" style="width:100%;padding:12px;background:#1a1a1a;color:#c8a27a;border:none;border-radius:8px;font-size:16px;font-weight:700;cursor:pointer">Unlock Admin</button>
+<div id="error" style="color:red;display:none;margin-top:10px">Wrong password! Try again.</div>
+</div></div>
+<script>
+const ADMIN_PASSWORD="Dreamy2024@";
+function checkPass(){const v=document.getElementById('passInput').value;if(v===ADMIN_PASSWORD){document.getElementById('lockScreen').style.display='none';sessionStorage.setItem('dreamy_auth','1');}else{document.getElementById('error').style.display='block';document.getElementById('passInput').value='';}}
+if(sessionStorage.getItem('dreamy_auth')==='1'){document.getElementById('lockScreen').style.display='none';}
+</script>
+  <header>
   <h1>Dreamy Designs</h1>
   <p>ADMIN CLOUD • LASER CUTTING AND ENGRAVING</p>
   <div style="margin-top:15px"><a href="index.html" style="color:#c8a27a;text-decoration:none;border:1px solid #c8a27a;padding:6px 18px;border-radius:50px;font-size:12px">← Back to Shop</a></div>
