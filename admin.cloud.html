@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Cloud - Dreamy Designs</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;600;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#faf6f1;font-family:'Inter',sans-serif}
+header{background:#1a1a1a;color:#f5efe6;text-align:center;padding:35px 20px 25px}
+header h1{font-family:'Playfair Display',serif;font-size:36px;color:#f5efe6}
+header p{color:#c8a27a;letter-spacing:3px;font-size:12px;margin-top:8px}
+.wrap{max-width:900px;margin:30px auto;padding:0 20px}
+.card{background:white;border-radius:20px;padding:25px;box-shadow:0 4px 20px rgba(0,0,0,.06);border:1px solid #f0e6d8;margin-bottom:25px}
+.card h2{font-family:'Playfair Display',serif;margin-bottom:18px;color:#1a1a1a}
+input,textarea{width:100%;padding:12px 15px;border:1px solid #e8ddd0;border-radius:12px;margin-bottom:14px;font-family:'Inter';font-size:14px;background:#fdfaf6}
+input:focus,textarea:focus{outline:none;border-color:#c8a27a}
+button.main{background:#1a1a1a;color:#c8a27a;border:none;padding:13px 25px;border-radius:50px;font-weight:700;cursor:pointer;width:100%;font-size:15px;letter-spacing:1px}
+button.main:hover{background:#000}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+.p-card{background:#faf6f1;border-radius:16px;padding:12px;border:1px solid #f0e6d8;text-align:center}
+.p-card img{width:100%;height:160px;object-fit:cover;border-radius:12px;background:white}
+.badge{display:inline-block;background:#1a1a1a;color:#c8a27a;padding:4px 12px;border-radius:50px;font-size:11px;margin-top:8px}
+.btns{display:flex;gap:8px;margin-top:10px}
+.btns button{flex:1;padding:8px;border-radius:50px;border:none;cursor:pointer;font-weight:600;font-size:12px}
+.del{background:#ffeaea;color:#a33}
+.edit{background:#f0e6d8;color:#5a4a3a}
+.status{text-align:center;padding:10px;background:white;border:1px dashed #c8a27a;border-radius:50px;width:fit-content;margin:0 auto 15px;font-size:13px}
+</style>
+</head>
+<body>
+<header>
+  <h1>Dreamy Designs</h1>
+  <p>ADMIN CLOUD • LASER CUTTING AND ENGRAVING</p>
+  <div style="margin-top:15px"><a href="index.html" style="color:#c8a27a;text-decoration:none;border:1px solid #c8a27a;padding:6px 18px;border-radius:50px;font-size:12px">← Back to Shop</a></div>
+</header>
+
+<div class="wrap">
+  <div id="cloud-status" class="status">☁️ Connecting to cloud...</div>
+
+  <div class="card">
+    <h2>Add New Creation</h2>
+    <input id="pName" placeholder="Product name e.g. Home Sweet Home Sign">
+    <input id="pPrice" type="number" placeholder="Price e.g. 150">
+    <input id="pImage" placeholder="Image URL - paste link or upload to imgbb.com and paste link">
+    <textarea id="pDesc" placeholder="Description e.g. 30cm round, pine wood, laser engraved" rows="3"></textarea>
+    <button class="main" id="addBtn">☁️ SAVE TO CLOUD</button>
+    <p style="font-size:11px;color:#a67c52;margin-top:10px;text-align:center">Tip: Save image first to https://imgbb.com then paste link here. Product appears on phone instantly!</p>
+  </div>
+
+  <div class="card">
+    <h2>Live Products (<span id="count">0</span>)</h2>
+    <div id="list" class="grid"></div>
+  </div>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getDatabase, ref, onValue, push, remove, set } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+const firebaseConfig = {
+    apiKey: "AIzaSyCKinMyZosG9At3h9fMrOtfcfC3090a-1xU",
+    authDomain: "dreamy-designs-c396f.firebaseapp.com",
+    databaseURL: "https://dreamy-designs-c396f-default-rtdb.firebaseio.com",
+    projectId: "dreamy-designs-c396f",
+    storageBucket: "dreamy-designs-c396f.firebasestorage.app",
+    messagingSenderId: "118249238361",
+    appId: "1:118249238361:web:ddfa9288dc51a86e11c388"
+};
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+const productsRef = ref(db, 'products');
+const status = document.getElementById('cloud-status');
+const list = document.getElementById('list');
+const count = document.getElementById('count');
+
+document.getElementById('addBtn').onclick = async () => {
+  const name = document.getElementById('pName').value.trim();
+  const price = document.getElementById('pPrice').value.trim();
+  const image = document.getElementById('pImage').value.trim() || 'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=500';
+  const desc = document.getElementById('pDesc').value.trim();
+  if(!name || !price){ alert('Add name + price!'); return; }
+  const newRef = push(productsRef);
+  await set(newRef, { id: newRef.key, name, price, image, desc, created: Date.now() });
+  document.getElementById('pName').value=''; document.getElementById('pPrice').value=''; document.getElementById('pImage').value=''; document.getElementById('pDesc').value='';
+  alert('✅ Saved to cloud! Check your phone - it\'s live!');
+};
+
+onValue(productsRef, (snap)=>{
+  const data = snap.val();
+  const products = data ? Object.values(data) : [];
+  status.textContent = `✅ Live from Cloud - ${products.length} products synced`;
+  count.textContent = products.length;
+  if(!products.length){ list.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:30px;color:#a67c52">No products yet. Add your first creation above ✨</div>`; return; }
+  list.innerHTML = products.slice().reverse().map(p=>`
+    <div class="p-card">
+      <img src="${p.image}" onerror="this.src='https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=500'">
+      <div style="font-weight:700;margin-top:8px">${p.name}</div>
+      <div class="badge">R ${p.price}</div>
+      <div style="font-size:11px;color:#888;margin-top:4px">${p.desc||''}</div>
+      <div class="btns">
+        <button class="del" onclick="deleteProduct('${p.id}')">Delete</button>
+      </div>
+    </div>
+  `).join('');
+});
+
+window.deleteProduct = async (id) => {
+  if(!confirm('Delete this product from cloud? It will disappear from phone too!')) return;
+  await remove(ref(db, 'products/'+id));
+};
+</script>
+</body>
+</html>
