@@ -37,9 +37,22 @@ button.main:hover{background:#000}
 <div id="error" style="color:red;display:none;margin-top:10px">Wrong password! Try again.</div>
 </div></div>
 <script>
+<script>
 const ADMIN_PASSWORD="Dreamy2024@";
-function checkPass(){const v=document.getElementById('passInput').value;if(v===ADMIN_PASSWORD){document.getElementById('lockScreen').style.display='none';sessionStorage.setItem('dreamy_auth','1');}else{document.getElementById('error').style.display='block';document.getElementById('passInput').value='';}}
-if(sessionStorage.getItem('dreamy_auth')==='1'){document.getElementById('lockScreen').style.display='none';}
+function checkPass(){
+  const v=document.getElementById('passInput').value;
+  if(v===ADMIN_PASSWORD){
+    document.getElementById('lockScreen').style.display='none';
+    sessionStorage.setItem('dreamy_auth','1');
+  }else{
+    document.getElementById('error').style.display='block';
+    document.getElementById('passInput').value='';
+  }
+}
+if(sessionStorage.getItem('dreamy_auth')==='1'){
+  document.getElementById('lockScreen').style.display='none';
+}
+</script>
 </script>
   <header>
   <h1>Dreamy Designs</h1>
