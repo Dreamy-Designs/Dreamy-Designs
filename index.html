@@ -8,30 +8,28 @@
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Segoe UI',Arial,sans-serif;background:#fdfaf6;color:#1a1a1a}
 :root{--navy:#0b2142;--gold:#c9a86a;--cream:#fdfaf6;--line:#e8d5b8;--text:#3a3a3a}
-.top{background:var(--navy);color:white;text-align:center;padding:36px 20px 30px}
-.top h1{font-family:'Brush Script MT',cursive;font-size:42px;font-weight:400;line-height:1}
+.top{background:var(--navy);color:white;text-align:center;padding:40px 20px 32px}
+.top h1{font-family:'Brush Script MT',cursive;font-size:44px;font-weight:400;line-height:1}
 .top h1 small{display:block;font-family:Arial,sans-serif;font-size:11px;letter-spacing:4px;font-weight:700;color:var(--gold);margin-top:8px}
-.top p{margin-top:12px;color:var(--gold);letter-spacing:3px;font-size:12px;font-weight:700}
-.divider{width:90px;height:2px;background:var(--gold);margin:14px auto 0}
+.top p{margin-top:14px;color:var(--gold);letter-spacing:3px;font-size:12px;font-weight:700}
+.divider{width:90px;height:2px;background:var(--gold);margin:16px auto 0}
 .hero{max-width:1200px;margin:24px auto;padding:0 16px}
-.hero img{width:100%;height:380px;object-fit:cover;border-radius:16px;border:1px solid var(--line)}
-.cats{max-width:1200px;margin:24px auto;padding:0 16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
+.hero img{width:100%;height:400px;object-fit:cover;border-radius:18px;border:1px solid var(--line)}
+.cats{max-width:1200px;margin:28px auto;padding:0 16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:14px}
 .cat{background:white;border:1px solid var(--line);border-radius:14px;padding:18px 10px;text-align:center;cursor:pointer;transition:.2s}
 .cat:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(11,33,66,.12);border-color:var(--gold)}
 .cat.active{border:2px solid var(--navy);background:#f0e6d3}
 .cat i{font-size:22px;color:var(--navy);margin-bottom:8px;display:block}
-.cat b{display:block;font-size:12px;color:var(--navy);letter-spacing:0.5px}
-.products{max-width:1200px;margin:10px auto 40px;padding:0 16px;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
-.prod{background:white;border:1px solid var(--line);border-radius:14px;overflow:hidden}
-.prod img{width:100%;height:210px;object-fit:cover}
+.cat b{display:block;font-size:12px;color:var(--navy)}
+.products{max-width:1200px;margin:10px auto 50px;padding:0 16px;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
+.prod{background:white;border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,0.04)}
+.prod img{width:100%;height:220px;object-fit:cover}
 .prod-body{padding:14px}
-.prod-body .badge{background:var(--navy);color:var(--gold);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700}
+.prod-body .badge{background:var(--navy);color:var(--gold);padding:4px 10px;border-radius:20px;font-size:11px;font-weight:700}
 .prod-body h3{margin-top:8px;color:var(--navy);font-size:15px}
 .prod-body p{font-size:13px;color:var(--text);margin-top:6px;line-height:1.4}
-.footer{background:var(--navy);color:white;padding:28px 20px;text-align:center;margin-top:30px}
+.footer{background:var(--navy);color:white;padding:32px 20px;text-align:center;margin-top:30px}
 .footer a{color:var(--gold);text-decoration:none}
-.btn{border:1px solid var(--line);background:white;padding:10px 18px;border-radius:10px;cursor:pointer;font-weight:700;color:var(--navy)}
-.btn-dark{background:var(--navy);color:var(--gold);border-color:var(--navy)}
 </style>
 </head>
 <body>
@@ -42,12 +40,7 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#fdfaf6;color:#1a1a1a}
 </div>
 
 <div class="hero">
-<img src="workshop-hero.jpg" alt="Dreamy Designs Workshop" onerror="this.style.display='none'">
-</div>
-
-<div style="max-width:1200px;margin:0 auto;padding:0 16px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
-<button class="btn btn-dark" onclick="filterCat('all',this)">VIEW ALL PRODUCTS</button>
-<button class="btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">CONTACT US</button>
+<img src="workshop-hero.jpg" alt="Workshop" onerror="this.style.display='none'">
 </div>
 
 <div class="cats">
@@ -62,16 +55,16 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#fdfaf6;color:#1a1a1a}
 </div>
 
 <div id="products" class="products"></div>
-<div id="noProd" style="text-align:center;padding:30px;display:none;color:#8a7a6a">No products in this category yet. Add them in Admin.</div>
+<div id="noProd" style="text-align:center;padding:30px;display:none;color:#8a7a6a">No products in this category yet.</div>
 
-<div id="contact" class="footer">
-<div style="font-size:16px;font-weight:700;letter-spacing:1px"><i class="fa-solid fa-phone" style="color:var(--gold)"></i> 064 546 4275 &nbsp; | &nbsp; <i class="fa-solid fa-location-dot" style="color:var(--gold)"></i> Kariega</div>
-<div style="margin-top:8px"><a href="https://wa.me/27645464275?text=Hi%20Dreamy%20Designs!" target="_blank"><i class="fa-brands fa-whatsapp"></i> WhatsApp Us</a></div>
-<div style="margin-top:12px;letter-spacing:3px;font-size:10px;color:var(--gold);font-weight:700">PRECISION • PASSION • PERSONALISATION</div>
+<div class="footer">
+<div style="font-size:15px;font-weight:700;letter-spacing:1px"><i class="fa-solid fa-phone" style="color:var(--gold)"></i> 064 546 4275 &nbsp; | &nbsp; <i class="fa-solid fa-location-dot" style="color:var(--gold)"></i> Kariega (Uitenhage) &nbsp; | &nbsp; <i class="fa-brands fa-facebook" style="color:var(--gold)"></i> Dreamy Designs Laser Cutting and Engraving</div>
+<div style="margin-top:10px;font-size:13px"><a href="https://wa.me/27645464275?text=Hi%20Dreamy%20Designs!%20I%20want%20to%20order" target="_blank"><i class="fa-brands fa-whatsapp"></i> WhatsApp: 064 546 4275</a></div>
+<div style="margin-top:14px;letter-spacing:3px;font-size:10px;color:var(--gold);font-weight:700">PRECISION • PASSION • PERSONALISATION</div>
 </div>
 
-<!-- WhatsApp Floating Button -->
-<a href="https://wa.me/27645464275?text=Hi%20Dreamy%20Designs!%20I%20want%20to%20order" target="_blank" style="position:fixed;bottom:20px;right:20px;background:#25D366;color:white;width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:32px;box-shadow:0 6px 18px rgba(0,0,0,0.35);z-index:9999;text-decoration:none;">
+<!-- FLOATING WHATSAPP BUTTON - ALWAYS VISIBLE -->
+<a href="https://wa.me/27645464275?text=Hi%20Dreamy%20Designs!%20I%20want%20to%20order%20Styled%20Coasters" target="_blank" id="waBtn" style="position:fixed;bottom:25px;right:25px;background:#25D366;color:white;width:65px;height:65px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:36px;box-shadow:0 6px 20px rgba(0,0,0,0.4);z-index:99999;text-decoration:none;">
 <i class="fa-brands fa-whatsapp"></i>
 </a>
 
@@ -84,7 +77,9 @@ async function load(){
 function render(list){
  const c=document.getElementById('products');const no=document.getElementById('noProd');c.innerHTML='';
  if(!list.length){no.style.display='block';return;}no.style.display='none';
- list.forEach(p=>{c.innerHTML+=`<div class="prod"><img src="${p.images[0]}"><div class="prod-body"><span class="badge">${p.category}</span><h3>${p.name}</h3><p>${p.desc||''}</p><div style="margin-top:10px"><a href="https://wa.me/27645464275?text=Hi!%20I%20want%20${encodeURIComponent(p.name)}" target="_blank" style="color:var(--navy);font-weight:800;text-decoration:none;font-size:13px"><i class="fa-brands fa-whatsapp"></i> Order on WhatsApp</a></div></div></div>`;});
+ list.forEach(p=>{
+   c.innerHTML+=`<div class="prod"><img src="${p.images[0]}"><div class="prod-body"><span class="badge">${p.category}</span><h3>${p.name}</h3><p>${p.desc||''}</p><div style="margin-top:10px"><a href="https://wa.me/27645464275?text=Hi!%20I%20want%20${encodeURIComponent(p.name)}" target="_blank" style="background:var(--navy);color:var(--gold);padding:7px 12px;border-radius:20px;font-size:12px;font-weight:700;text-decoration:none;display:inline-block"><i class="fa-brands fa-whatsapp"></i> Order on WhatsApp</a></div></div></div>`;
+ });
 }
 function filterCat(cat,el){
  document.querySelectorAll('.cat').forEach(x=>x.classList.remove('active'));el.classList.add('active');
