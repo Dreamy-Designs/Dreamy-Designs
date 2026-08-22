@@ -1,100 +1,110 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dreamy Designs | Laser Cutting and Engraving</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;600&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#faf6f1;font-family:'Inter',sans-serif;color:#2b2b2b}
-header{background:#1a1a1a;color:#f5efe6;text-align:center;padding:50px 20px}
-header h1{font-family:'Playfair Display',serif;font-size:48px;letter-spacing:2px}
-header .sub{color:#c8a27a;letter-spacing:4px;font-size:14px;margin-top:8px;text-transform:uppercase}
-.slogan{background:linear-gradient(135deg,#1a1a1a,#2c2c2c);color:white;text-align:center;padding:80px 20px}
-.slogan h2{font-family:'Playfair Display',serif;font-size:56px;line-height:1.1}
-.slogan h2 span{color:#c8a27a;font-style:italic}
-.slogan p{margin-top:20px;color:#ccc;max-width:600px;margin-left:auto;margin-right:auto}
-.cat-bar{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;padding:30px 20px;background:white;position:sticky;top:0;z-index:10;box-shadow:0 2px 10px rgba(0,0,0,0.05)}
-.cat-btn{padding:10px 20px;border-radius:25px;border:1px solid #c8a27a;background:white;color:#5a4a3a;cursor:pointer;font-weight:600;transition:0.2s}
-.cat-btn.active,.cat-btn:hover{background:#1a1a1a;color:#c8a27a;border-color:#1a1a1a}
-.products{max-width:1200px;margin:40px auto;padding:0 20px}
-.products h2{font-family:'Playfair Display',serif;font-size:36px;text-align:center;margin-bottom:8px}
-.products .subtitle{text-align:center;color:#8a7a6a;margin-bottom:30px}
-.product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px}
-.product-card{background:white;border-radius:20px;overflow:hidden;padding:0;box-shadow:0 4px 20px rgba(0,0,0,0.06);transition:0.3s;border:1px solid #f0e6d8}
-.product-card:hover{transform:translateY(-6px);box-shadow:0 12px 30px rgba(0,0,0,0.12)}
-.product-card img{width:100%;height:260px;object-fit:cover}
-.product-card .info{padding:18px}
-.product-card h3{margin:10px 0 6px;font-family:'Playfair Display',serif;font-size:20px}
-.badge{display:inline-block;background:#faf6f1;color:#c8a27a;border:1px solid #e8d5bc;padding:4px 10px;border-radius:20px;font-size:11px;letter-spacing:1px;text-transform:uppercase;font-weight:600}
-.product-card p{color:#6b5a4a;font-size:14px;line-height:1.5;margin-top:6px}
-footer{background:#1a1a1a;color:#c8a27a;padding:40px 20px;margin-top:60px;text-align:center}
-.footer-inner{max-width:1200px;margin:auto}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#fdfaf6;color:#1a1a1a}
+:root{--navy:#0b2142;--gold:#c9a86a;--cream:#fdfaf6;--line:#e8d5b8}
+.top{background:var(--navy);color:white;text-align:center;padding:40px 20px 32px}
+.top h1{font-family:'Brush Script MT','Segoe Script',cursive;font-size:48px;font-weight:400;letter-spacing:1px;line-height:1}
+.top h1 small{display:block;font-family:Arial,sans-serif;font-size:12px;letter-spacing:4px;font-weight:700;color:var(--gold);margin-top:8px}
+.top .divider{width:90px;height:2px;background:var(--gold);margin:14px auto}
+.hero{background:var(--cream);text-align:center;padding:32px 20px 20px}
+.hero h2{font-size:22px;letter-spacing:0.8px;color:var(--navy);font-weight:700}
+.hero h2 span{font-family:'Brush Script MT','Segoe Script',cursive;font-size:36px;font-weight:400;text-transform:capitalize}
+.grid-cat{max-width:1000px;margin:26px auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;padding:0 15px}
+.card-cat{background:white;border:1px solid var(--line);border-radius:14px;padding:15px 18px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:0.2s}
+.card-cat:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(11,33,66,0.12);border-color:var(--gold)}
+.icon{width:46px;height:46px;border-radius:50%;background:#fdf2e4;border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;color:var(--navy);font-size:17px;flex-shrink:0}
+.card-cat h3{font-size:12.5px;letter-spacing:0.9px;color:var(--navy);font-weight:700}
+.products-wrap{max-width:1200px;margin:10px auto 0;padding:24px 20px}
+.products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:20px}
+.p-card{background:white;border-radius:14px;overflow:hidden;border:1px solid #ece2d1;box-shadow:0 4px 14px rgba(0,0,0,0.04)}
+.p-card img{width:100%;height:260px;object-fit:cover;background:#f5efe6}
+.p-card .info{padding:14px}
+.badge{background:var(--navy);color:var(--gold);padding:4px 10px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:0.5px}
+.footer{background:var(--navy);color:white;padding:28px 20px;text-align:center;margin-top:50px}
+.footer .contacts{display:flex;flex-wrap:wrap;gap:22px;justify-content:center;font-size:14px}
+.footer .contacts i{color:var(--gold);margin-right:6px}
+.gold-line{height:2px;background:linear-gradient(90deg,var(--gold),#f0d8a8,var(--gold));margin:22px auto;max-width:700px}
+.bottom-text{letter-spacing:3px;font-size:11px;color:var(--gold);font-weight:700}
+.active{border-color:var(--navy)!important;background:#eef2ff!important;box-shadow:0 6px 18px rgba(11,33,66,0.15)!important}
 </style>
 </head>
 <body>
-<header>
-<h1>DREAMY DESIGNS</h1>
-<div class="sub">Laser Cutting & Engraving</div>
-</header>
-<div class="slogan">
-<h2>Crafted with <span>Precision</span>,<br>Designed with Love</h2>
-<p>Custom laser creations for your home, gifts, pets and business. Made in Uitenhage with care.</p>
+
+<div class="top">
+<div style="font-size:22px;opacity:0.8;margin-bottom:6px"><i class="fa-solid fa-crosshairs"></i></div>
+<h1>Dreamy Designs<small>LASER CUTTING AND ENGRAVING</small></h1>
+<div class="divider"></div>
 </div>
-<div class="cat-bar">
-<button onclick="filterCat('all')" class="cat-btn active">All</button>
-<button onclick="filterCat('Home decor')" class="cat-btn">Home decor</button>
-<button onclick="filterCat('Personalized gifts')" class="cat-btn">Personalized gifts</button>
-<button onclick="filterCat('Pet tags & accessories')" class="cat-btn">Pet tags & accessories</button>
-<button onclick="filterCat('Kitchen & serverware')" class="cat-btn">Kitchen & serverware</button>
-<button onclick="filterCat('Signage & displays')" class="cat-btn">Signage & displays</button>
-<button onclick="filterCat('Puzzles & educational')" class="cat-btn">Puzzles & educational</button>
-<button onclick="filterCat('Industrial & prototyping')" class="cat-btn">Industrial & prototyping</button>
+
+<div class="hero">
+<h2>WE CREATE WHAT YOU <span>Imagine</span></h2>
+<div class="grid-cat" id="catGrid">
+<div class="card-cat" onclick="filterCat('Home decor',this)"><div class="icon"><i class="fa-solid fa-sun"></i></div><h3>HOME DECOR</h3></div>
+<div class="card-cat" onclick="filterCat('Personalised gifts',this)"><div class="icon"><i class="fa-solid fa-gift"></i></div><h3>PERSONALISED GIFTS</h3></div>
+<div class="card-cat" onclick="filterCat('Pet tags & accessories',this)"><div class="icon"><i class="fa-solid fa-paw"></i></div><h3>PET TAGS & ACCESSORIES</h3></div>
+<div class="card-cat" onclick="filterCat('Kitchen & serverware',this)"><div class="icon"><i class="fa-solid fa-bottle-water"></i></div><h3>KITCHEN & SERVERWARE</h3></div>
+<div class="card-cat" onclick="filterCat('Signage & displays',this)"><div class="icon"><i class="fa-solid fa-house"></i></div><h3>SIGNAGE & DISPLAYS</h3></div>
+<div class="card-cat" onclick="filterCat('Puzzles & educational',this)"><div class="icon"><i class="fa-solid fa-puzzle-piece"></i></div><h3>PUZZLES & EDUCATIONAL ITEMS</h3></div>
+<div class="card-cat" onclick="filterCat('Industrial & prototyping',this)"><div class="icon"><i class="fa-solid fa-gears"></i></div><h3>INDUSTRIAL & PROTOTYPE CUTTING</h3></div>
+<div class="card-cat active" onclick="filterCat('all',this)"><div class="icon" style="background:var(--navy);color:var(--gold)"><i class="fa-solid fa-table-cells-large"></i></div><h3>VIEW ALL PRODUCTS</h3></div>
 </div>
-<section class="products">
-<h2>Our Creations</h2>
-<div class="subtitle">No pricing — custom quotes — just beautiful work</div>
-<div id="productGrid" class="product-grid"></div>
-<div id="noProducts" style="text-align:center;padding:60px;color:#aaa;display:none">
-<h3>No products here yet ✨</h3><p>We're adding new laser creations soon!</p>
 </div>
-</section>
-<footer>
-<div class="footer-inner">
-<p style="font-family:'Playfair Display',serif;font-size:22px;color:#f5efe6">DREAMY DESIGNS</p>
-<p style="margin-top:10px">📍 Uitenhage, Eastern Cape | WhatsApp for custom orders</p>
-<p style="margin-top:20px;font-size:12px;opacity:0.6">© 2026 Dreamy Designs</p>
+
+<div class="products-wrap">
+<div id="productGrid" class="products-grid"></div>
+<div id="empty" style="text-align:center;color:#aaa;padding:60px;display:none"><h3>No products yet ✨</h3><p style="margin-top:8px">Add products via Admin to see them here</p></div>
 </div>
-</footer>
+
+<div class="footer">
+<div class="contacts">
+<span><i class="fa-solid fa-phone"></i>0645464275</span>
+<span><i class="fa-solid fa-location-dot"></i>Kariega (Uitenhage)</span>
+<span><i class="fa-brands fa-facebook"></i>Dreamy Designs Laser Cutting and Engraving</span>
+</div>
+<div class="gold-line"></div>
+<div class="bottom-text">PRECISION • PASSION • PERSONALISATION</div>
+</div>
+
 <script>
 let allProducts=[];
-fetch('./products.json').then(r=>r.json()).then(data=>{allProducts=data;renderProducts('all')}).catch(()=>{
- document.getElementById('productGrid').innerHTML='<div style="grid-column:1/-1;text-align:center;padding:40px;background:white;border-radius:20px"><h3>Welcome to Dreamy Designs! ✨</h3><p style="color:#888;margin-top:10px">Products will appear here once you upload them via Admin Panel.</p><a href="./admin.cloud.html" style="display:inline-block;margin-top:15px;padding:10px 20px;background:#1a1a1a;color:#c8a27a;border-radius:20px;text-decoration:none">Open Admin</a></div>';
+fetch('./products.json?v='+Date.now()).then(r=>r.json()).then(data=>{
+ allProducts=data;
+ renderProducts('all');
+}).catch(()=>{
+ document.getElementById('productGrid').innerHTML='<div style="grid-column:1/-1;text-align:center;padding:50px;background:white;border-radius:14px;border:1px dashed #c9a86a"><h3 style="color:#0b2142">Welcome to Dreamy Designs! ✨</h3><p style="color:#8a7a6a;margin-top:10px">Upload your first product via Admin to see it here.</p><a href="./admin.cloud.html" style="display:inline-block;margin-top:16px;padding:10px 22px;background:#0b2142;color:#c9a86a;border-radius:20px;text-decoration:none;font-weight:bold">Open Admin Panel</a></div>';
 });
 function renderProducts(cat){
- const grid=document.getElementById('productGrid'); const no=document.getElementById('noProducts');
- let filtered=cat==='all'?allProducts:allProducts.filter(p=>p.category===cat);
- if(filtered.length===0){grid.innerHTML='';no.style.display='block';return;}
- no.style.display='none';
+ const grid=document.getElementById('productGrid');
+ const empty=document.getElementById('empty');
+ let filtered = cat==='all' ? allProducts : allProducts.filter(p=>p.category===cat);
+ if(filtered.length===0){
+   grid.innerHTML='';
+   if(allProducts.length>0) empty.style.display='block';
+   return;
+ }
+ empty.style.display='none';
  grid.innerHTML=filtered.map(p=>`
-   <div class="product-card">
-     <img src="${p.images[0]}" loading="lazy">
+   <div class="p-card">
+     <img src="${p.images[0]}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/300x300?text=Dreamy+Designs'">
      <div class="info">
        <span class="badge">${p.category}</span>
-       <h3>${p.name}</h3>
-       <p>${p.desc||''}</p>
-       ${p.images.length>1?`<div style="display:flex;gap:6px;margin-top:12px">${p.images.slice(1,5).map(im=>`<img src="${im}" style="width:44px;height:44px;object-fit:cover;border-radius:8px;border:1px solid #eee">`).join('')}${p.images.length>5?`<span style="font-size:12px;color:#c8a27a;line-height:44px">+${p.images.length-5}</span>`:''}</div>`:''}
+       <h3 style="margin:10px 0 6px;color:#0b2142;font-size:16px">${p.name}</h3>
+       <p style="color:#6b5a4a;font-size:13.5px;line-height:1.4">${p.desc||''}</p>
      </div>
    </div>
  `).join('');
 }
-function filterCat(cat){
- document.querySelectorAll('.cat-btn').forEach(b=>{
-   let isActive = (cat==='all' && b.textContent.trim()==='All') || b.textContent.trim()===cat;
-   b.classList.toggle('active',isActive);
- });
+function filterCat(cat,el){
+ document.querySelectorAll('.card-cat').forEach(c=>c.classList.remove('active'));
+ if(el) el.classList.add('active');
  renderProducts(cat);
- window.scrollTo({top: document.querySelector('.products').offsetTop-100, behavior:'smooth'});
 }
 </script>
 </body>
