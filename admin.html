@@ -2,83 +2,134 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dreamy Designs | Custom Laser Creations</title>
+<title>Dreamy Designs - Admin</title>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Segoe UI',Arial;background:#fdfaf6;color:#0b2142}
-:root{--navy:#0b2142;--gold:#c9a86a;--line:#e8d5b8}
-header{background:var(--navy);color:white;text-align:center;padding:40px 20px}
-header h1{font-family:'Brush Script MT',cursive;font-size:52px;font-weight:400}
-header small{display:block;font-family:Arial;font-size:12px;letter-spacing:5px;color:var(--gold);margin-top:4px}
-nav{position:sticky;top:0;z-index:99;background:white;border-bottom:1px solid var(--line);display:flex;gap:8px;overflow:auto;padding:10px 16px}
-nav button{white-space:nowrap;padding:8px 16px;border-radius:20px;border:1px solid var(--line);background:#fdfaf6;font-weight:700;color:var(--navy);cursor:pointer}
-nav button.active{background:var(--navy);color:var(--gold)}
-.hero{text-align:center;padding:40px 20px}
-.hero h2{font-size:28px;margin-bottom:8px}
-.hero p{color:#6b6b6b}
-.grid{max-width:1200px;margin:20px auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px;padding:0 16px}
-.card{background:white;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,.05)}
-.card img{width:100%;height:220px;object-fit:cover}
-.card-body{padding:14px}
-.badge{display:inline-block;background:var(--navy);color:var(--gold);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;margin-bottom:6px}
-.card-body h3{font-size:16px;margin:4px 0}
-.card-body p{font-size:13px;color:#666}
-.whatsapp{position:fixed;bottom:20px;right:20px;background:#25D366;color:white;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;box-shadow:0 4px 12px rgba(0,0,0,.2);z-index:100}
-footer{background:var(--navy);color:var(--gold);text-align:center;padding:20px;margin-top:40px;font-size:13px}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#fdfaf6;color:#1a1a1a}
+:root{--navy:#0b2142;--gold:#c9a86a;--cream:#fdfaf6;--line:#e8d5b8}
+.top{background:var(--navy);color:white;text-align:center;padding:32px 20px 26px}
+.top h1{font-family:'Brush Script MT',cursive;font-size:38px;font-weight:400}
+.top h1 small{display:block;font-family:Arial,sans-serif;font-size:11px;letter-spacing:4px;font-weight:700;color:var(--gold);margin-top:6px}
+.top p{margin-top:10px;color:var(--gold);letter-spacing:2px;font-size:12px;font-weight:700}
+.divider{width:80px;height:2px;background:var(--gold);margin:12px auto 0}
+.container{max-width:900px;margin:-18px auto 40px;background:white;padding:28px;border-radius:16px;box-shadow:0 10px 30px rgba(11,33,66,0.12);border:1px solid var(--line)}
+label{display:block;margin-top:18px;font-weight:700;color:var(--navy);font-size:13px;letter-spacing:0.6px}
+select,input,textarea{width:100%;padding:12px;margin-top:6px;background:#fdfaf6;border:1px solid var(--line);border-radius:10px;box-sizing:border-box;font-size:14px}
+button.main{background:var(--navy);color:var(--gold);padding:14px 24px;border:none;border-radius:10px;font-weight:800;cursor:pointer;width:100%;margin-top:20px;font-size:15px;letter-spacing:0.5px}
+button.main:hover{background:#081a36}
+button.sec{background:white;color:var(--navy);border:1px solid var(--line);padding:12px 24px;border-radius:10px;cursor:pointer;width:100%;margin-top:10px;font-weight:700}
+button.cloud{background:#c9a86a;color:#0b2142;border:none;padding:12px 24px;border-radius:10px;cursor:pointer;width:100%;margin-top:10px;font-weight:800}
+.preview{margin-top:12px;display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px}
+.preview img{width:100%;height:110px;object-fit:cover;border-radius:10px;border:1px solid var(--line)}
+.item{background:#fdfaf6;padding:14px;border-radius:12px;margin-bottom:10px;display:flex;gap:14px;align-items:center;border:1px solid var(--line)}
+.item img{width:68px;height:68px;object-fit:cover;border-radius:8px}
+.badge{background:var(--navy);color:var(--gold);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700}
+.footer{background:var(--navy);color:white;padding:18px;text-align:center;margin-top:30px;border-radius:12px}
+.log{background:#0b2142;color:#c9a86a;padding:12px;border-radius:10px;margin-top:12px;font-size:12px;white-space:pre-wrap;display:none;border:1px solid #c9a86a}
 </style>
 </head>
 <body>
-<header><h1>Dreamy Designs<small>CUSTOM LASER CREATIONS</small></h1></header>
-<nav id="cats">
-<button class="active" onclick="filter('all')">All</button>
-<button onclick="filter('Home decor')">Home Decor</button>
-<button onclick="filter('Personalised gifts')">Personalised Gifts</button>
-<button onclick="filter('Pet tags & accessories')">Pet Tags</button>
-<button onclick="filter('Kitchen & serverware')">Kitchen</button>
-<button onclick="filter('Signage & displays')">Signage</button>
-<button onclick="filter('Puzzles & educational')">Puzzles</button>
-<button onclick="filter('Industrial & prototyping')">Industrial</button>
-<button onclick="filter('Sport')">Sport</button>
-<button onclick="filter('Awards')">Awards</button>
-</nav>
-<div class="hero"><h2>Handcrafted with Love</h2><p>Unique laser-cut creations for every occasion</p></div>
-<div id="grid" class="grid"></div>
-<a class="whatsapp" href="https://wa.me/27600000000" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
-<footer>© 2025 Dreamy Designs | Uitenhage, Eastern Cape | <a href="admin.html" style="color:var(--gold)">Admin</a></footer>
+<div class="top">
+<h1>Dreamy Designs<small>LASER CUTTING AND ENGRAVING — ADMIN</small></h1>
+<p>WE CREATE WHAT YOU IMAGINE - CLOUD AUTO EDITION</p>
+<div class="divider"></div>
+</div>
+<div class="container">
+<label><i class="fa-solid fa-key"></i> GitHub Token (One Time Setup - Saved on device)</label>
+<input id="token" type="text" placeholder="Paste ghp_... token here">
+<button class="sec" onclick="saveT()"><i class="fa-solid fa-floppy-disk"></i> Save Token</button>
+<div id="log" class="log"></div>
+
+<label><i class="fa-solid fa-cloud-arrow-down"></i> Step 1: Load from Cloud (for Phone editing)</label>
+<button class="cloud" onclick="loadFromCloud()"><i class="fa-solid fa-cloud"></i> LOAD products.json FROM GITHUB</button>
+
+<label><i class="fa-solid fa-table-cells-large"></i> Category *</label>
+<select id="category">
+<option value="Home decor">HOME DECOR</option>
+<option value="Personalised gifts">PERSONALISED GIFTS</option>
+<option value="Pet tags & accessories">PET TAGS & ACCESSORIES</option>
+<option value="Kitchen & serverware">KITCHEN & SERVERWARE</option>
+<option value="Signage & displays">SIGNAGE & DISPLAYS</option>
+<option value="Puzzles & educational">PUZZLES & EDUCATIONAL ITEMS</option>
+<option value="Industrial & prototyping">INDUSTRIAL & PROTOTYPE CUTTING</option>
+<option value="Sport">SPORT</option>
+<option value="Awards">AWARDS</option>
+</select>
+<label><i class="fa-solid fa-tag"></i> Product Name *</label>
+<input id="name" placeholder="e.g. NMA Trophy 2025">
+<label><i class="fa-solid fa-align-left"></i> Description</label>
+<textarea id="desc" rows="3" placeholder="Laser cut from... size... custom available..."></textarea>
+<label><i class="fa-solid fa-images"></i> Product Photos * (Auto Compress)</label>
+<input type="file" id="photos" multiple accept="image/*">
+<div id="preview" class="preview"></div>
+<button class="main" onclick="addAndPush()"><i class="fa-solid fa-rocket"></i> ADD & AUTO UPDATE LIVE SITE</button>
+<button class="sec" onclick="downloadJSON()"><i class="fa-solid fa-download"></i> Manual Download Backup</button>
+<button class="sec" onclick="window.open('https://dreamy-designs.github.io/Dreamy-Designs/','_blank')"><i class="fa-solid fa-eye"></i> View Live Site</button>
+<div id="productList" style="margin-top:28px"></div>
+<div class="footer" style="margin-top:30px">
+<div style="font-size:13px"><i class="fa-solid fa-phone" style="color:var(--gold)"></i> 064 546 4275 &nbsp; <i class="fa-solid fa-location-dot" style="color:var(--gold)"></i> Kariega</div>
+<div style="margin-top:10px;letter-spacing:2px;font-size:10px;color:var(--gold);font-weight:700">PRECISION • PASSION • PERSONALISATION</div>
+</div>
+</div>
 <script>
-const OWNER='dreamy-designs',REPO='Dreamy-Designs',PATH='products.json';
-let allProducts=[],active='all';
-async function load(){
+const OWNER='dreamy-designs', REPO='Dreamy-Designs', PATH='products.json';
+let products=JSON.parse(localStorage.getItem('dreamy_products')||'[]');let tempImages=[];
+document.getElementById('token').value=localStorage.getItem('gh_token')||'';
+function log(m){let l=document.getElementById('log');l.style.display='block';l.textContent=m;}
+function saveT(){let t=document.getElementById('token').value.trim();if(!t.startsWith('ghp_')){log('ERROR: Token must start with ghp_');return;}localStorage.setItem('gh_token',t);log('Token Saved OK!');}
+async function loadFromCloud(){
+ log('Loading from GitHub...');
  try{
-  let r=await fetch(`https://raw.githubusercontent.com/${OWNER}/${REPO}/main/${PATH}?t=${Date.now()}`);
-  if(!r.ok) throw new Error('No products.json yet');
-  allProducts=await r.json();
- }catch(e){
-  // fallback to localStorage if GitHub fails
-  allProducts=JSON.parse(localStorage.getItem('dreamy_products')||'[]');
- }
- // also merge localStorage newer items
- let local=JSON.parse(localStorage.getItem('dreamy_products')||'[]');
- if(local.length>allProducts.length){allProducts=local;}
- render();
+  const res = await fetch(`https://raw.githubusercontent.com/${OWNER}/${REPO}/main/${PATH}?t=`+Date.now());
+  if(!res.ok) throw new Error('products.json not found - '+res.status);
+  const data = await res.json();
+  products = data;
+  localStorage.setItem('dreamy_products',JSON.stringify(products));
+  render();
+  log('Loaded '+data.length+' products OK!');
+ }catch(e){ log('Load FAILED: '+e.message); }
+}
+function compress(file){return new Promise(r=>{let fr=new FileReader();fr.onload=e=>{let im=new Image();im.onload=()=>{let c=document.createElement('canvas');let max=900,w=im.width,h=im.height;if(w>h){if(w>max){h*=max/w;w=max;}}else{if(h>max){w*=max/h;h=max;}}c.width=w;c.height=h;c.getContext('2d').drawImage(im,0,0,w,h);r(c.toDataURL('image/jpeg',0.75));};im.src=e.target.result;};fr.readAsDataURL(file);});}
+document.getElementById('photos').addEventListener('change',async function(e){
+ tempImages=[];document.getElementById('preview').innerHTML='';log('Compressing photos...');
+ for(let f of e.target.files){let d=await compress(f);tempImages.push(d);let img=document.createElement('img');img.src=d;document.getElementById('preview').appendChild(img);}
+ log('Ready: '+tempImages.length+' photos compressed!');
+});
+async function addAndPush(){
+ const t=localStorage.getItem('gh_token');if(!t){log('ERROR: Paste & Save Token first!');return;}
+ const cat=document.getElementById('category').value;const name=document.getElementById('name').value.trim();const desc=document.getElementById('desc').value.trim();
+ if(!name||tempImages.length===0){log('ERROR: Need name + photo');return;}
+ products.unshift({id:Date.now(),category:cat,name,desc,images:tempImages});
+ localStorage.setItem('dreamy_products',JSON.stringify(products));render();
+ log('Uploading to GitHub...');
+ try{
+  let sha=null;try{let r=await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${PATH}`,{headers:{Authorization:`token ${t}`}});if(r.ok){let j=await r.json();sha=j.sha;}}catch{}
+  let content=btoa(unescape(encodeURIComponent(JSON.stringify(products,null,2))));
+  let put=await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${PATH}`,{method:'PUT',headers:{Authorization:`token ${t}`,'Content-Type':'application/json'},body:JSON.stringify({message:'Add '+name,content,sha})});
+  let txt=await put.text();if(!put.ok){log('GitHub ERROR:\n'+txt);products.shift();localStorage.setItem('dreamy_products',JSON.stringify(products));render();return;}
+  log('SUCCESS! Live site will update in 60 seconds!\n'+name+' is now live!');
+ }catch(e){log('FAILED: '+e.message);}
+ document.getElementById('name').value='';document.getElementById('desc').value='';document.getElementById('preview').innerHTML='';tempImages=[];
 }
 function render(){
- let g=document.getElementById('grid');g.innerHTML='';
- let filtered=active==='all'?allProducts:allProducts.filter(p=>p.category===active);
- if(filtered.length===0){g.innerHTML='<p style="grid-column:1/-1;text-align:center;padding:40px;color:#999">No products in this category yet. Check back soon!</p>';return;}
- filtered.forEach(p=>{
-  let img=p.images&&p.images[0]?p.images[0]:'https://via.placeholder.com/300';
-  g.innerHTML+=`<div class="card"><img src="${img}" alt="${p.name}"><div class="card-body"><span class="badge">${p.category}</span><h3>${p.name}</h3><p>${p.desc||''}</p></div></div>`;
- });
+ const list=document.getElementById('productList');list.innerHTML='<h3 style="margin-bottom:12px;color:#0b2142"><i class="fa-solid fa-box"></i> Products ('+products.length+')</h3>';
+ products.forEach((p,i)=>{list.innerHTML+=`<div class="item"><img src="${p.images[0]}"><div style="flex:1"><span class="badge">${p.category}</span><div style="font-weight:bold;margin-top:4px;color:#0b2142">${p.name}</div><div style="font-size:12px;color:#8a7a6a">${p.desc.substring(0,70)}</div></div><button onclick="removeProduct(${i})" style="width:auto;padding:8px 12px;background:#c94a4a;color:white;border:none;border-radius:8px;cursor:pointer">X</button></div>`;});
 }
-function filter(c){
- active=c;
- document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
- event.target.classList.add('active');
- render();
+async function removeProduct(i){
+ if(!confirm('Delete '+products[i].name+'?')) return;
+ const t=localStorage.getItem('gh_token');if(!t){log('Need token to delete from cloud');return;}
+ products.splice(i,1);localStorage.setItem('dreamy_products',JSON.stringify(products));render();
+ log('Deleting from GitHub...');
+ try{
+  let r=await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${PATH}`,{headers:{Authorization:`token ${t}`}});let j=await r.json();
+  let content=btoa(unescape(encodeURIComponent(JSON.stringify(products,null,2))));
+  await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${PATH}`,{method:'PUT',headers:{Authorization:`token ${t}`,'Content-Type':'application/json'},body:JSON.stringify({message:'Delete product',content,sha:j.sha})});
+  log('Deleted OK! Live site updating...');
+ }catch(e){log('Delete failed: '+e.message);}
 }
-load();
+function downloadJSON(){const dataStr="data:text/json;charset=utf-8,"+encodeURIComponent(JSON.stringify(products,null,2));const a=document.createElement('a');a.href=dataStr;a.download="products.json";a.click();}
+render();
 </script>
 </body>
 </html>
