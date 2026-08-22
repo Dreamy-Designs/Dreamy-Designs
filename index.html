@@ -1,47 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dreamy Designs | Laser Cutting & Engraving | Kariega</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dreamy Designs - Laser Cutting & Engraving | Kariega</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 <style>
-:root{--navy:#0a1931;--gold:#d4af37;--light:#f8f5f0}
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
-body{background:var(--light)}
-header{background:var(--navy);color:var(--gold);padding:12px 20px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:99}
-.logo{font-weight:900;letter-spacing:1px}
-.logo span{color:white;font-family:cursive}
-.cats{display:flex;gap:10px;overflow-x:auto;padding:18px;background:white;border-bottom:2px solid #eee}
-.cats::-webkit-scrollbar{display:none}
-.cat{min-width:110px;height:70px;border:1.5px solid #ddd;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;background:#fff;transition:.2s}
-.cat.active,.cat:hover{border-color:var(--gold);background:var(--navy);color:var(--gold)}
-.cat i{font-size:20px;margin-bottom:4px}
-.cat b{font-size:11px;text-align:center}
-#products{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:14px;padding:18px}
-.card{background:white;border-radius:16px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,.07);border:1px solid #eee}
-.card img{width:100%;height:170px;object-fit:cover}
-.card .info{padding:10px}
-.card .info h4{font-size:13px;color:var(--navy);height:32px;overflow:hidden}
-.price{color:var(--gold);font-weight:800;margin-top:6px}
-.btn{width:100%;background:var(--navy);color:var(--gold);border:none;padding:8px;border-radius:8px;margin-top:8px;font-weight:700;cursor:pointer}
-footer{background:var(--navy);color:white;text-align:center;padding:20px;margin-top:20px}
-footer a{color:var(--gold);text-decoration:none}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#fdfaf6;color:#1a1a1a}
+:root{--navy:#0b2142;--gold:#c9a86a;--cream:#fdfaf6;--line:#e8d5b8;--text:#3a3a3a}
+.top{background:var(--navy);color:white;text-align:center;padding:40px 20px 32px}
+.top h1{font-family:'Brush Script MT',cursive;font-size:44px;font-weight:400;line-height:1}
+.top h1 small{display:block;font-family:Arial,sans-serif;font-size:11px;letter-spacing:4px;font-weight:700;color:var(--gold);margin-top:8px}
+.top p{margin-top:14px;color:var(--gold);letter-spacing:3px;font-size:12px;font-weight:700}
+.divider{width:90px;height:2px;background:var(--gold);margin:16px auto 0}
+.hero{max-width:1200px;margin:24px auto;padding:0 16px}
+.hero img{width:100%;height:400px;object-fit:cover;border-radius:18px;border:1px solid var(--line)}
+.cats{max-width:1200px;margin:28px auto;padding:0 16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:14px}
+.cat{background:white;border:1px solid var(--line);border-radius:14px;padding:18px 10px;text-align:center;cursor:pointer;transition:.2s}
+.cat:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(11,33,66,.12);border-color:var(--gold)}
+.cat.active{border:2px solid var(--navy);background:#f0e6d3}
+.cat i{font-size:22px;color:var(--navy);margin-bottom:8px;display:block}
+.cat b{display:block;font-size:12px;color:var(--navy)}
+.products{max-width:1200px;margin:10px auto 50px;padding:0 16px;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
+.prod{background:white;border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,0.04)}
+.prod img{width:100%;height:220px;object-fit:cover}
+.prod-body{padding:14px}
+.prod-body .badge{background:var(--navy);color:var(--gold);padding:4px 10px;border-radius:20px;font-size:11px;font-weight:700}
+.prod-body h3{margin-top:8px;color:var(--navy);font-size:15px}
+.prod-body p{font-size:13px;color:var(--text);margin-top:6px;line-height:1.4}
+.footer{background:var(--navy);color:white;padding:32px 20px;text-align:center;margin-top:30px}
+.footer a{color:var(--gold);text-decoration:none}
 </style>
 </head>
 <body>
+<div class="top">
+<h1>Dreamy Designs<small>LASER CUTTING AND ENGRAVING</small></h1>
+<p>WE CREATE WHAT YOU IMAGINE</p>
+<div class="divider"></div>
+</div>
 
-<header>
-<div class="logo">Dreamy Designs <span>Laser Cutting & Engraving</span></div>
-<div><i class="fa-solid fa-cart-shopping"></i> <span id="cartCount">0</span></div>
-</header>
+<div class="hero">
+<img src="workshop-hero.jpg" alt="Workshop" onerror="this.style.display='none'">
+</div>
 
 <div class="cats">
 <div class="cat active" onclick="filterCat('all',this)"><i class="fa-solid fa-border-all"></i><b>VIEW ALL</b></div>
 <div class="cat" onclick="filterCat('Home decor',this)"><i class="fa-solid fa-house"></i><b>HOME DECOR</b></div>
 <div class="cat" onclick="filterCat('Personalised gifts',this)"><i class="fa-solid fa-gift"></i><b>PERSONALISED GIFTS</b></div>
 <div class="cat" onclick="filterCat('Pet tags & accessories',this)"><i class="fa-solid fa-paw"></i><b>PET TAGS</b></div>
-<div class="cat" onclick="filterCat('Kitchen & serverware',this)"><i class="fa-solid fa-utensils"></i><b>KITCHEN</b></div>
+<div class="cat" onclick="filterCat('Kitchen & serverware',this)"><i class="fa-solid fa-utensils"></i><b>KITCHEN & SERVERWARE</b></div>
 <div class="cat" onclick="filterCat('Signage & displays',this)"><i class="fa-solid fa-sign-hanging"></i><b>SIGNAGE</b></div>
 <div class="cat" onclick="filterCat('Puzzles & educational',this)"><i class="fa-solid fa-puzzle-piece"></i><b>PUZZLES</b></div>
 <div class="cat" onclick="filterCat('Industrial & prototyping',this)"><i class="fa-solid fa-industry"></i><b>INDUSTRIAL</b></div>
@@ -49,40 +56,38 @@ footer a{color:var(--gold);text-decoration:none}
 <div class="cat" onclick="filterCat('Awards',this)"><i class="fa-solid fa-trophy"></i><b>AWARDS</b></div>
 </div>
 
-<div id="products"></div>
+<div id="products" class="products"></div>
+<div id="noProd" style="text-align:center;padding:30px;display:none;color:#8a7a6a">No products in this category yet.</div>
 
-<footer>
-<p>📲 WhatsApp: <a href="https://wa.me/27645464275">064 546 4275</a> | Kariega</p>
-<p style="margin-top:8px;font-size:12px;opacity:.7">© 2026 Dreamy Designs - We Create What You Imagine</p>
-</footer>
+<div class="footer">
+<div style="font-size:15px;font-weight:700;letter-spacing:1px"><i class="fa-solid fa-phone" style="color:var(--gold)"></i> 064 546 4275 &nbsp; | &nbsp; <i class="fa-solid fa-location-dot" style="color:var(--gold)"></i> Kariega (Uitenhage) &nbsp; | &nbsp; <i class="fa-brands fa-facebook" style="color:var(--gold)"></i> Dreamy Designs Laser Cutting and Engraving</div>
+<div style="margin-top:10px;font-size:13px"><a href="https://wa.me/27645464275?text=Hi%20Dreamy%20Designs!%20I%20want%20to%20order" target="_blank"><i class="fa-brands fa-whatsapp"></i> WhatsApp: 064 546 4275</a></div>
+<div style="margin-top:14px;letter-spacing:3px;font-size:10px;color:var(--gold);font-weight:700">PRECISION • PASSION • PERSONALISATION</div>
+</div>
+
+<!-- FLOATING WHATSAPP BUTTON - ALWAYS VISIBLE -->
+<a href="https://wa.me/27645464275?text=Hi%20Dreamy%20Designs!%20I%20want%20to%20order%20Styled%20Coasters" target="_blank" id="waBtn" style="position:fixed;bottom:25px;right:25px;background:#25D366;color:white;width:65px;height:65px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:36px;box-shadow:0 6px 20px rgba(0,0,0,0.4);z-index:99999;text-decoration:none;">
+<i class="fa-brands fa-whatsapp"></i>
+</a>
 
 <script>
-let allProducts = JSON.parse(localStorage.getItem('dreamy_products')||'[]');
-if(allProducts.length===0){
-allProducts=[
-{name:"Custom Wooden Trophy - Sport",price:250,category:"Sport",img:"https://via.placeholder.com/300x300?text=Sport+Trophy"},
-{name:"Excellence Award Trophy",price:320,category:"Awards",img:"https://via.placeholder.com/300x300?text=Award+Trophy"},
-];
+let allProducts=[];
+async function load(){
+ try{const r=await fetch('products.json?v='+Date.now());allProducts=await r.json();}catch(e){allProducts=JSON.parse(localStorage.getItem('dreamy_products')||'[]');}
+ render(allProducts);
 }
 function render(list){
-document.getElementById('products').innerHTML=list.map(p=>`
-<div class="card">
-<img src="${p.img}">
-<div class="info">
-<h4>${p.name}</h4>
-<div class="price">R${p.price}</div>
-<button class="btn" onclick="order('${p.name}')">Order on WhatsApp</button>
-</div>
-</div>`).join('');
+ const c=document.getElementById('products');const no=document.getElementById('noProd');c.innerHTML='';
+ if(!list.length){no.style.display='block';return;}no.style.display='none';
+ list.forEach(p=>{
+   c.innerHTML+=`<div class="prod"><img src="${p.images[0]}"><div class="prod-body"><span class="badge">${p.category}</span><h3>${p.name}</h3><p>${p.desc||''}</p><div style="margin-top:10px"><a href="https://wa.me/27645464275?text=Hi!%20I%20want%20${encodeURIComponent(p.name)}" target="_blank" style="background:var(--navy);color:var(--gold);padding:7px 12px;border-radius:20px;font-size:12px;font-weight:700;text-decoration:none;display:inline-block"><i class="fa-brands fa-whatsapp"></i> Order on WhatsApp</a></div></div></div>`;
+ });
 }
 function filterCat(cat,el){
-document.querySelectorAll('.cat').forEach(c=>c.classList.remove('active'));
-el.classList.add('active');
-if(cat==='all') render(allProducts);
-else render(allProducts.filter(p=>p.category.toLowerCase()===cat.toLowerCase()));
+ document.querySelectorAll('.cat').forEach(x=>x.classList.remove('active'));el.classList.add('active');
+ if(cat==='all') render(allProducts); else render(allProducts.filter(p=>p.category===cat));
 }
-function order(name){window.open(`https://wa.me/27645464275?text=Hi Dreamy Designs, I want to order ${name}`,'_blank')}
-render(allProducts);
+load();
 </script>
 </body>
 </html>
