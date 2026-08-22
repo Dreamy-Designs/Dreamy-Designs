@@ -22,14 +22,29 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#fdfaf6;color:#1a1a1a}
 .cat i{font-size:22px;color:var(--navy);margin-bottom:8px;display:block}
 .cat b{display:block;font-size:12px;color:var(--navy)}
 .products{max-width:1200px;margin:10px auto 50px;padding:0 16px;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
-.prod{background:white;border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,0.04)}
+.prod{background:white;border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,0.04);cursor:pointer;transition:.2s}
+.prod:hover{transform:translateY(-4px);box-shadow:0 10px 24px rgba(11,33,66,.15)}
 .prod img{width:100%;height:220px;object-fit:cover}
 .prod-body{padding:14px}
 .prod-body .badge{background:var(--navy);color:var(--gold);padding:4px 10px;border-radius:20px;font-size:11px;font-weight:700}
 .prod-body h3{margin-top:8px;color:var(--navy);font-size:15px}
-.prod-body p{font-size:13px;color:var(--text);margin-top:6px;line-height:1.4}
+.prod-body p{font-size:13px;color:var(--text);margin-top:6px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .footer{background:var(--navy);color:white;padding:32px 20px;text-align:center;margin-top:30px}
 .footer a{color:var(--gold);text-decoration:none}
+/* NEW PREVIEW MODAL */
+.modal{position:fixed;inset:0;background:rgba(11,33,66,0.92);display:none;align-items:center;justify-content:center;z-index:9999;padding:16px}
+.modal.active{display:flex}
+.modal-box{background:#fdfaf6;border-radius:18px;max-width:900px;width:100%;max-height:95vh;overflow:auto;display:grid;grid-template-columns:1.2fr 0.8fr}
+@media(max-width:750px){.modal-box{grid-template-columns:1fr}}
+.m-left{padding:14px}
+.m-left .mainImg{width:100%;height:420px;object-fit:contain;background:white;border-radius:12px;border:1px solid var(--line)}
+.thumbs{display:flex;gap:8px;margin-top:12px;overflow:auto;padding-bottom:4px}
+.thumbs img{width:70px;height:70px;object-fit:cover;border-radius:8px;cursor:pointer;border:2px solid transparent;flex-shrink:0}
+.thumbs img.active{border-color:var(--gold)}
+.m-right{padding:22px}
+.m-right h2{font-family:'Brush Script MT',cursive;font-size:32px;color:var(--navy)}
+.btn-wa{background:#25D366;color:white;padding:14px;border:none;border-radius:10px;width:100%;font-weight:800;cursor:pointer;margin-top:16px;font-size:15px}
+.btn-close{background:white;border:1px solid var(--line);padding:12px;border-radius:10px;width:100%;margin-top:10px;cursor:pointer;font-weight:700}
 </style>
 </head>
 <body>
@@ -38,11 +53,7 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#fdfaf6;color:#1a1a1a}
 <p>WE CREATE WHAT YOU IMAGINE</p>
 <div class="divider"></div>
 </div>
-
-<div class="hero">
-<img src="workshop-hero.jpg" alt="Workshop" onerror="this.style.display='none'">
-</div>
-
+<div class="hero"><img src="workshop-hero.jpg" alt="Workshop" onerror="this.style.display='none'"></div>
 <div class="cats">
 <div class="cat active" onclick="filterCat('all',this)"><i class="fa-solid fa-border-all"></i><b>VIEW ALL</b></div>
 <div class="cat" onclick="filterCat('Home decor',this)"><i class="fa-solid fa-house"></i><b>HOME DECOR</b></div>
@@ -55,37 +66,80 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#fdfaf6;color:#1a1a1a}
 <div class="cat" onclick="filterCat('Sport',this)"><i class="fa-solid fa-medal"></i><b>SPORT</b></div>
 <div class="cat" onclick="filterCat('Awards',this)"><i class="fa-solid fa-trophy"></i><b>AWARDS</b></div>
 </div>
-
 <div id="products" class="products"></div>
 <div id="noProd" style="text-align:center;padding:30px;display:none;color:#8a7a6a">No products in this category yet.</div>
 
+<!-- PREVIEW MODAL -->
+<div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
+<div class="modal-box">
+<div class="m-left">
+<img id="mainImg" class="mainImg" src="">
+<div id="thumbs" class="thumbs"></div>
+<button class="btn-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i> Close</button>
+</div>
+<div class="m-right">
+<span id="mBadge" class="badge" style="background:var(--navy);color:var(--gold);padding:5px 12px;border-radius:20px;font-size:11px;font-weight:700"></span>
+<h2 id="mName" style="margin:12px 0"></h2>
+<p id="mDesc" style="line-height:1.6;color:var(--text)"></p>
+<button class="btn-wa" onclick="orderWA()"><i class="fa-brands fa-whatsapp"></i> Order this on WhatsApp</button>
+<p style="font-size:11px;opacity:0.5;margin-top:14px;text-align:center">Dreamy Designs • Kariega • 064 546 4275</p>
+</div>
+</div>
+</div>
+
 <div class="footer">
-<div style="font-size:15px;font-weight:700;letter-spacing:1px"><i class="fa-solid fa-phone" style="color:var(--gold)"></i> 064 546 4275 &nbsp; | &nbsp; <i class="fa-solid fa-location-dot" style="color:var(--gold)"></i> Kariega (Uitenhage) &nbsp; | &nbsp; <i class="fa-brands fa-facebook" style="color:var(--gold)"></i> Dreamy Designs Laser Cutting and Engraving</div>
+<div style="font-size:15px;font-weight:700;letter-spacing:1px"><i class="fa-solid fa-phone" style="color:var(--gold)"></i> 064 546 4275 &nbsp; | &nbsp; <i class="fa-solid fa-location-dot" style="color:var(--gold)"></i> Kariega (Uitenhage) &nbsp; | &nbsp; <i class="fa-brands fa-facebook" style="color:var(--gold)"></i> Dreamy Designs</div>
 <div style="margin-top:10px;font-size:13px"><a href="https://wa.me/27645464275?text=Hi%20Dreamy%20Designs!%20I%20want%20to%20order" target="_blank"><i class="fa-brands fa-whatsapp"></i> WhatsApp: 064 546 4275</a></div>
 <div style="margin-top:14px;letter-spacing:3px;font-size:10px;color:var(--gold);font-weight:700">PRECISION • PASSION • PERSONALISATION</div>
 </div>
-
-<!-- FLOATING WHATSAPP BUTTON - ALWAYS VISIBLE -->
-<a href="https://wa.me/27645464275?text=Hi%20Dreamy%20Designs!%20I%20want%20to%20order%20Styled%20Coasters" target="_blank" id="waBtn" style="position:fixed;bottom:25px;right:25px;background:#25D366;color:white;width:65px;height:65px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:36px;box-shadow:0 6px 20px rgba(0,0,0,0.4);z-index:99999;text-decoration:none;">
-<i class="fa-brands fa-whatsapp"></i>
-</a>
+<a href="https://wa.me/27645464275?text=Hi%20Dreamy%20Designs!%20I%20want%20to%20order" target="_blank" style="position:fixed;bottom:25px;right:25px;background:#25D366;color:white;width:65px;height:65px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:36px;box-shadow:0 6px 20px rgba(0,0,0,0.4);z-index:9999;text-decoration:none;"><i class="fa-brands fa-whatsapp"></i></a>
 
 <script>
-let allProducts=[];
+let allProducts=[],filtered=[],current=null;
 async function load(){
- try{const r=await fetch('products.json?v='+Date.now());allProducts=await r.json();}catch(e){allProducts=JSON.parse(localStorage.getItem('dreamy_products')||'[]');}
- render(allProducts);
+ try{
+  const r=await fetch('./products.json?v='+Date.now());
+  if(!r.ok)throw new Error('no json');
+  allProducts=await r.json();
+ }catch(e){
+  allProducts=JSON.parse(localStorage.getItem('dreamy_products')||'[]');
+ }
+ filtered=[...allProducts];
+ render(filtered);
 }
 function render(list){
  const c=document.getElementById('products');const no=document.getElementById('noProd');c.innerHTML='';
  if(!list.length){no.style.display='block';return;}no.style.display='none';
- list.forEach(p=>{
-   c.innerHTML+=`<div class="prod"><img src="${p.images[0]}"><div class="prod-body"><span class="badge">${p.category}</span><h3>${p.name}</h3><p>${p.desc||''}</p><div style="margin-top:10px"><a href="https://wa.me/27645464275?text=Hi!%20I%20want%20${encodeURIComponent(p.name)}" target="_blank" style="background:var(--navy);color:var(--gold);padding:7px 12px;border-radius:20px;font-size:12px;font-weight:700;text-decoration:none;display:inline-block"><i class="fa-brands fa-whatsapp"></i> Order on WhatsApp</a></div></div></div>`;
+ list.forEach((p,idx)=>{
+   let realIdx = allProducts.indexOf(p);
+   // find index in filtered for modal
+   c.innerHTML+=`<div class="prod" onclick="openModal(${idx})"><img src="${p.images[0]}" loading="lazy"><div class="prod-body"><span class="badge">${p.category}</span><h3>${p.name}</h3><p>${p.desc||''}</p></div></div>`;
  });
 }
 function filterCat(cat,el){
  document.querySelectorAll('.cat').forEach(x=>x.classList.remove('active'));el.classList.add('active');
- if(cat==='all') render(allProducts); else render(allProducts.filter(p=>p.category===cat));
+ if(cat==='all'){filtered=[...allProducts];}else{filtered=allProducts.filter(p=>p.category===cat);}
+ render(filtered);
+}
+function openModal(i){
+ current=filtered[i];
+ document.getElementById('mBadge').textContent=current.category;
+ document.getElementById('mName').textContent=current.name;
+ document.getElementById('mDesc').textContent=current.desc||'Custom laser cut & engraved with precision and passion.';
+ const main=document.getElementById('mainImg');main.src=current.images[0];
+ const th=document.getElementById('thumbs');th.innerHTML='';
+ current.images.forEach((src,idx)=>{
+   let im=document.createElement('img');im.src=src;if(idx===0)im.classList.add('active');
+   im.onclick=()=>{main.src=src;th.querySelectorAll('img').forEach(x=>x.classList.remove('active'));im.classList.add('active');};
+   th.appendChild(im);
+ });
+ document.getElementById('modal').classList.add('active');
+}
+function closeModal(){document.getElementById('modal').classList.remove('active');}
+function orderWA(){
+ if(!current)return;
+ let txt=`Hi Dreamy Designs!%0A%0AI want to order:%0A*${encodeURIComponent(current.name)}*%0ACategory: ${encodeURIComponent(current.category)}%0A%0A${encodeURIComponent(current.desc||'')}%0A%0APlease send price & details!`;
+ window.open('https://wa.me/27645464275?text='+txt,'_blank');
 }
 load();
 </script>
