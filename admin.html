@@ -19,6 +19,7 @@ select,input,textarea{width:100%;padding:12px;margin-top:6px;background:#fdfaf6;
 button.main{background:var(--navy);color:var(--gold);padding:14px 24px;border:none;border-radius:10px;font-weight:800;cursor:pointer;width:100%;margin-top:20px;font-size:15px;letter-spacing:0.5px}
 button.main:hover{background:#081a36}
 button.sec{background:white;color:var(--navy);border:1px solid var(--line);padding:12px 24px;border-radius:10px;cursor:pointer;width:100%;margin-top:10px;font-weight:700}
+button.cloud{background:#c9a86a;color:#0b2142;border:none;padding:12px 24px;border-radius:10px;cursor:pointer;width:100%;margin-top:10px;font-weight:800}
 .preview{margin-top:12px;display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px}
 .preview img{width:100%;height:110px;object-fit:cover;border-radius:10px;border:1px solid var(--line)}
 .item{background:#fdfaf6;padding:14px;border-radius:12px;margin-bottom:10px;display:flex;gap:14px;align-items:center;border:1px solid var(--line)}
@@ -30,10 +31,13 @@ button.sec{background:white;color:var(--navy);border:1px solid var(--line);paddi
 <body>
 <div class="top">
 <h1>Dreamy Designs<small>LASER CUTTING AND ENGRAVING — ADMIN</small></h1>
-<p>WE CREATE WHAT YOU IMAGINE</p>
+<p>WE CREATE WHAT YOU IMAGINE - CLOUD EDITION</p>
 <div class="divider"></div>
 </div>
 <div class="container">
+<label><i class="fa-solid fa-cloud-arrow-down"></i> Step 1: Load from Cloud (for Phone editing)</label>
+<button class="cloud" onclick="loadFromCloud()"><i class="fa-solid fa-cloud"></i> LOAD products.json FROM GITHUB (Use this on Phone!)</button>
+
 <label><i class="fa-solid fa-table-cells-large"></i> Category *</label>
 <select id="category">
 <option value="Home decor">HOME DECOR</option>
@@ -47,7 +51,7 @@ button.sec{background:white;color:var(--navy);border:1px solid var(--line);paddi
 <option value="Awards">AWARDS</option>
 </select>
 <label><i class="fa-solid fa-tag"></i> Product Name *</label>
-<input id="name" placeholder="e.g. Home is our happy place">
+<input id="name" placeholder="e.g. NMA Trophy 2025">
 <label><i class="fa-solid fa-align-left"></i> Description</label>
 <textarea id="desc" rows="3" placeholder="Laser cut from... size... custom available..."></textarea>
 <label><i class="fa-solid fa-images"></i> Product Photos * (Multiple allowed)</label>
@@ -64,6 +68,20 @@ button.sec{background:white;color:var(--navy);border:1px solid var(--line);paddi
 </div>
 <script>
 let products=JSON.parse(localStorage.getItem('dreamy_products')||'[]');let tempImages=[];
+
+async function loadFromCloud(){
+ try{
+  const res = await fetch('./products.json?v='+Date.now());
+  const data = await res.json();
+  if(confirm('Load '+data.length+' products from GitHub? This will replace phone storage with cloud data.')){
+   products = data;
+   localStorage.setItem('dreamy_products',JSON.stringify(products));
+   render();
+   alert('Loaded '+data.length+' products from cloud! Now you can edit on phone!');
+  }
+ }catch(e){ alert('Could not load products.json - make sure file exists on GitHub!'); }
+}
+
 document.getElementById('photos').addEventListener('change',function(e){
  tempImages=[];document.getElementById('preview').innerHTML='';
  Array.from(e.target.files).forEach(file=>{const reader=new FileReader();reader.onload=function(ev){tempImages.push(ev.target.result);const img=document.createElement('img');img.src=ev.target.result;document.getElementById('preview').appendChild(img);};reader.readAsDataURL(file);});
