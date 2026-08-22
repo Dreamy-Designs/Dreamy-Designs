@@ -2,103 +2,88 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dreamy Designs - Admin</title>
+<title>Dreamy Designs - AUTO Admin</title>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Segoe UI',Arial,sans-serif;background:#fdfaf6;color:#1a1a1a}
-:root{--navy:#0b2142;--gold:#c9a86a;--cream:#fdfaf6;--line:#e8d5b8}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#fdfaf6}
+:root{--navy:#0b2142;--gold:#c9a86a;--line:#e8d5b8}
 .top{background:var(--navy);color:white;text-align:center;padding:32px 20px 26px}
 .top h1{font-family:'Brush Script MT',cursive;font-size:38px;font-weight:400}
-.top h1 small{display:block;font-family:Arial,sans-serif;font-size:11px;letter-spacing:4px;font-weight:700;color:var(--gold);margin-top:6px}
+.top small{display:block;font-family:Arial;font-size:11px;letter-spacing:4px;color:var(--gold);margin-top:6px}
 .top p{margin-top:10px;color:var(--gold);letter-spacing:2px;font-size:12px;font-weight:700}
-.divider{width:80px;height:2px;background:var(--gold);margin:12px auto 0}
 .container{max-width:900px;margin:-18px auto 40px;background:white;padding:28px;border-radius:16px;box-shadow:0 10px 30px rgba(11,33,66,0.12);border:1px solid var(--line)}
-label{display:block;margin-top:18px;font-weight:700;color:var(--navy);font-size:13px;letter-spacing:0.6px}
-select,input,textarea{width:100%;padding:12px;margin-top:6px;background:#fdfaf6;border:1px solid var(--line);border-radius:10px;box-sizing:border-box;font-size:14px}
-button.main{background:var(--navy);color:var(--gold);padding:14px 24px;border:none;border-radius:10px;font-weight:800;cursor:pointer;width:100%;margin-top:20px;font-size:15px;letter-spacing:0.5px}
-button.main:hover{background:#081a36}
-button.sec{background:white;color:var(--navy);border:1px solid var(--line);padding:12px 24px;border-radius:10px;cursor:pointer;width:100%;margin-top:10px;font-weight:700}
-button.cloud{background:#c9a86a;color:#0b2142;border:none;padding:12px 24px;border-radius:10px;cursor:pointer;width:100%;margin-top:10px;font-weight:800}
-.preview{margin-top:12px;display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px}
+label{display:block;margin-top:18px;font-weight:700;color:var(--navy);font-size:13px}
+select,input,textarea{width:100%;padding:12px;margin-top:6px;background:#fdfaf6;border:1px solid var(--line);border-radius:10px;font-size:14px}
+button.main{background:var(--navy);color:var(--gold);padding:14px;border:none;border-radius:10px;font-weight:800;width:100%;margin-top:20px;cursor:pointer}
+button.cloud{background:var(--gold);color:var(--navy);padding:12px;border:none;border-radius:10px;font-weight:800;width:100%;margin-top:10px;cursor:pointer}
+button.sec{background:white;color:var(--navy);border:1px solid var(--line);padding:12px;border-radius:10px;width:100%;margin-top:10px;cursor:pointer}
+.preview{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px;margin-top:12px}
 .preview img{width:100%;height:110px;object-fit:cover;border-radius:10px;border:1px solid var(--line)}
 .item{background:#fdfaf6;padding:14px;border-radius:12px;margin-bottom:10px;display:flex;gap:14px;align-items:center;border:1px solid var(--line)}
 .item img{width:68px;height:68px;object-fit:cover;border-radius:8px}
 .badge{background:var(--navy);color:var(--gold);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700}
-.footer{background:var(--navy);color:white;padding:18px;text-align:center;margin-top:30px;border-radius:12px}
+.status{padding:10px;border-radius:8px;margin-top:10px;text-align:center;font-weight:700;display:none}
+.status.ok{background:#d4edda;color:#155724;display:block}
+.status.err{background:#f8d7da;color:#721c24;display:block}
 </style>
 </head>
 <body>
-<div class="top">
-<h1>Dreamy Designs<small>LASER CUTTING AND ENGRAVING — ADMIN</small></h1>
-<p>WE CREATE WHAT YOU IMAGINE - CLOUD EDITION</p>
-<div class="divider"></div>
-</div>
+<div class="top"><h1>Dreamy Designs<small>AUTO-CLOUD ADMIN</small></h1><p>AUTO UPDATES LIVE SITE</p></div>
 <div class="container">
-<label><i class="fa-solid fa-cloud-arrow-down"></i> Step 1: Load from Cloud (for Phone editing)</label>
-<button class="cloud" onclick="loadFromCloud()"><i class="fa-solid fa-cloud"></i> LOAD products.json FROM GITHUB (Use this on Phone!)</button>
+<label>GitHub Token (1 time setup)</label>
+<input id="token" type="password" placeholder="Paste ghp_ token here - saved on this device only">
+<button class="sec" onclick="saveToken()">Save Token</button>
+<div id="status" class="status"></div>
 
-<label><i class="fa-solid fa-table-cells-large"></i> Category *</label>
+<button class="cloud" onclick="loadFromCloud()"><i class="fa-solid fa-cloud-arrow-down"></i> LOAD FROM GITHUB</button>
+
+<label>Category *</label>
 <select id="category">
 <option value="Home decor">HOME DECOR</option>
 <option value="Personalised gifts">PERSONALISED GIFTS</option>
 <option value="Pet tags & accessories">PET TAGS & ACCESSORIES</option>
 <option value="Kitchen & serverware">KITCHEN & SERVERWARE</option>
 <option value="Signage & displays">SIGNAGE & DISPLAYS</option>
-<option value="Puzzles & educational">PUZZLES & EDUCATIONAL ITEMS</option>
-<option value="Industrial & prototyping">INDUSTRIAL & PROTOTYPE CUTTING</option>
+<option value="Puzzles & educational">PUZZLES & EDUCATIONAL</option>
+<option value="Industrial & prototyping">INDUSTRIAL & PROTOTYPING</option>
 <option value="Sport">SPORT</option>
 <option value="Awards">AWARDS</option>
 </select>
-<label><i class="fa-solid fa-tag"></i> Product Name *</label>
-<input id="name" placeholder="e.g. NMA Trophy 2025">
-<label><i class="fa-solid fa-align-left"></i> Description</label>
-<textarea id="desc" rows="3" placeholder="Laser cut from... size... custom available..."></textarea>
-<label><i class="fa-solid fa-images"></i> Product Photos * (Multiple allowed)</label>
-<input type="file" id="photos" multiple accept="image/*">
+<label>Product Name *</label><input id="name" placeholder="e.g. NMA Trophy">
+<label>Description</label><textarea id="desc" rows="3"></textarea>
+<label>Photos *</label><input type="file" id="photos" multiple accept="image/*">
 <div id="preview" class="preview"></div>
-<button class="main" onclick="addProduct()"><i class="fa-solid fa-plus"></i> Add Product to Website</button>
-<button class="sec" onclick="downloadJSON()"><i class="fa-solid fa-download"></i> Download products.json (Upload to GitHub)</button>
-<button class="sec" onclick="window.open('https://dreamy-designs.github.io/Dreamy-Designs/','_blank')"><i class="fa-solid fa-eye"></i> View Live Site</button>
+<button class="main" onclick="addProductAuto()"><i class="fa-solid fa-rocket"></i> ADD & AUTO UPDATE LIVE SITE</button>
+<button class="sec" onclick="window.open('https://dreamy-designs.github.io/Dreamy-Designs/','_blank')">View Live Site</button>
 <div id="productList" style="margin-top:28px"></div>
-<div class="footer" style="margin-top:30px">
-<div style="font-size:13px"><i class="fa-solid fa-phone" style="color:var(--gold)"></i> 064 546 4275 &nbsp; <i class="fa-solid fa-location-dot" style="color:var(--gold)"></i> Kariega</div>
-<div style="margin-top:10px;letter-spacing:2px;font-size:10px;color:var(--gold);font-weight:700">PRECISION • PASSION • PERSONALISATION</div>
-</div>
 </div>
 <script>
+const OWNER='dreamy-designs';const REPO='Dreamy-Designs';const PATH='products.json';
 let products=JSON.parse(localStorage.getItem('dreamy_products')||'[]');let tempImages=[];
-
-async function loadFromCloud(){
+document.getElementById('token').value=localStorage.getItem('gh_token')||'';
+function saveToken(){const t=document.getElementById('token').value.trim();if(!t.startsWith('ghp_')){showStatus('Invalid token! Must start with ghp_','err');return;}localStorage.setItem('gh_token',t);showStatus('Token saved! Now you can auto-update!','ok');}
+function showStatus(m,c){const s=document.getElementById('status');s.textContent=m;s.className='status '+c;s.style.display='block';setTimeout(()=>s.style.display='none',4000);}
+async function loadFromCloud(){try{const r=await fetch(`https://raw.githubusercontent.com/${OWNER}/${REPO}/main/${PATH}?t=`+Date.now());const d=await r.json();products=d;localStorage.setItem('dreamy_products',JSON.stringify(products));render();showStatus('Loaded '+d.length+' from GitHub!','ok');}catch(e){showStatus('Failed to load - check products.json exists','err');}}
+document.getElementById('photos').addEventListener('change',e=>{tempImages=[];document.getElementById('preview').innerHTML='';Array.from(e.target.files).forEach(f=>{const rd=new FileReader();rd.onload=ev=>{tempImages.push(ev.target.result);const im=document.createElement('img');im.src=ev.target.result;document.getElementById('preview').appendChild(im);};rd.readAsDataURL(f);});});
+async function uploadToGitHub(){
+ const token=localStorage.getItem('gh_token');if(!token){showStatus('Add GitHub token first!','err');return false;}
  try{
-  const res = await fetch('./products.json?v='+Date.now());
-  const data = await res.json();
-  if(confirm('Load '+data.length+' products from GitHub? This will replace phone storage with cloud data.')){
-   products = data;
-   localStorage.setItem('dreamy_products',JSON.stringify(products));
-   render();
-   alert('Loaded '+data.length+' products from cloud! Now you can edit on phone!');
-  }
- }catch(e){ alert('Could not load products.json - make sure file exists on GitHub!'); }
+  let sha=null;try{const getRes=await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${PATH}`,{headers:{Authorization:`token ${token}`}});if(getRes.ok){const j=await getRes.json();sha=j.sha;}}catch(e){}
+  const content=btoa(unescape(encodeURIComponent(JSON.stringify(products,null,2))));
+  const res=await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${PATH}`,{method:'PUT',headers:{Authorization:`token ${token}`,'Content-Type':'application/json'},body:JSON.stringify({message:'Auto update products - '+new Date().toISOString(),content,sha})});
+  if(!res.ok){const err=await res.text();throw new Error(err);}
+  showStatus('LIVE SITE UPDATED! Wait 60 sec then refresh site!','ok');return true;
+ }catch(e){showStatus('Auto upload failed: '+e.message,'err');console.error(e);return false;}
 }
-
-document.getElementById('photos').addEventListener('change',function(e){
- tempImages=[];document.getElementById('preview').innerHTML='';
- Array.from(e.target.files).forEach(file=>{const reader=new FileReader();reader.onload=function(ev){tempImages.push(ev.target.result);const img=document.createElement('img');img.src=ev.target.result;document.getElementById('preview').appendChild(img);};reader.readAsDataURL(file);});
-});
-function addProduct(){
+async function addProductAuto(){
  const cat=document.getElementById('category').value;const name=document.getElementById('name').value.trim();const desc=document.getElementById('desc').value.trim();
- if(!name||tempImages.length===0){alert('Add name + at least 1 photo!');return;}
+ if(!name||tempImages.length===0){alert('Add name + photo!');return;}
  products.unshift({id:Date.now(),category:cat,name,desc,images:tempImages});localStorage.setItem('dreamy_products',JSON.stringify(products));render();
  document.getElementById('name').value='';document.getElementById('desc').value='';document.getElementById('preview').innerHTML='';tempImages=[];
- alert('Added! Now click Download products.json and upload it to GitHub.');
+ await uploadToGitHub();
 }
-function render(){
- const list=document.getElementById('productList');list.innerHTML='<h3 style="margin-bottom:12px;color:#0b2142"><i class="fa-solid fa-box"></i> Added Products ('+products.length+')</h3>';
- products.forEach((p,i)=>{list.innerHTML+=`<div class="item"><img src="${p.images[0]}"><div style="flex:1"><span class="badge">${p.category}</span><div style="font-weight:bold;margin-top:4px;color:#0b2142">${p.name}</div><div style="font-size:12px;color:#8a7a6a">${p.desc.substring(0,70)}</div></div><button onclick="removeProduct(${i})" style="width:auto;padding:8px 12px;background:#c94a4a;color:white;border:none;border-radius:8px;cursor:pointer">X</button></div>`;});
-}
-function removeProduct(i){if(confirm('Remove this?')){products.splice(i,1);localStorage.setItem('dreamy_products',JSON.stringify(products));render();}}
-function downloadJSON(){if(products.length===0){alert('No products to download!');return;}const dataStr="data:text/json;charset=utf-8,"+encodeURIComponent(JSON.stringify(products,null,2));const a=document.createElement('a');a.href=dataStr;a.download="products.json";a.click();}
+function render(){const l=document.getElementById('productList');l.innerHTML='<h3>Products ('+products.length+')</h3>';products.forEach((p,i)=>{l.innerHTML+=`<div class="item"><img src="${p.images[0]}"><div style="flex:1"><span class="badge">${p.category}</span><div style="font-weight:bold">${p.name}</div></div><button onclick="if(confirm('Delete?')){products.splice(${i},1);localStorage.setItem('dreamy_products',JSON.stringify(products));render();uploadToGitHub();}" style="padding:6px 10px;background:#c94a4a;color:white;border:none;border-radius:6px">X</button></div>`;});}
 render();
 </script>
 </body>
